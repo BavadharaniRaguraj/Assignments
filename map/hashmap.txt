@@ -1,0 +1,47 @@
+package map;
+
+import java.util.HashMap;
+
+public class Map {
+	
+
+		public static void main(String[] args) {
+		
+		HashMap<Integer,String> h=new HashMap<Integer, String>();
+		h.put(1, "vivitha");
+		h.put(2, "priyanka");
+		h.put(3, "veena");
+		h.put(4, "ronuu");
+		h.put(5, "siji");
+		h.put(7, "rishi");
+		h.put(6, "kavi");
+		h.put(8, "rajesh");
+		h.put(2,"vivek");
+		h.put(9,"vishu");
+		h.put(null, "anu");
+		h.put(2, "dinu");
+		
+		
+		System.out.println("Size of map :"+h.size());
+		for(Integer key:h.keySet()){
+			String name=h.get(key);
+			System.out.println(key+ " "+name);
+		}
+		h.remove(2);
+		System.out.println("After removing :");
+		for(Integer key:h.keySet()){
+			String i=h.get(key);
+			System.out.println(key+ " "+i);
+		}
+		
+		System.out.println("is the map contains anything? " +h.isEmpty());
+		System.out.println("is the map contains 2? "+h.containsKey(2));
+		System.out.println("is the map contains easa? "+h.containsValue("easa"));
+		
+		
+
+		}
+
+	
+
+}
