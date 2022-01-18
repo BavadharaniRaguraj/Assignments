@@ -1,0 +1,33 @@
+package constructor;
+
+public class Constructor {
+
+		String n;
+		
+		//default constructor
+		public void A()
+		{
+			System.out.println("Default constructor");
+		}
+		
+		
+		//parameterized constructor
+		public void B(String name)
+		{
+			n=name;
+			System.out.print("Parameterized constructor!! :"+n);
+		    
+		}
+
+		public static void main(String[] args)
+		{
+			// TODO Auto-generated method stub
+
+			Constructor a=new Constructor();
+			a.A();
+			a.B("Bavadharani");
+		}
+
+	
+
+}
