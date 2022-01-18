@@ -1,0 +1,70 @@
+package arithmetic_calculator;
+
+import java.util.Scanner;
+
+public class Arithmetic_Calculator {
+
+
+	public void display()
+	{
+	
+		
+			Scanner s=new Scanner(System.in);
+			
+		System.out.println("Enter first number :");
+		double n1=s.nextDouble();
+		System.out.println("Enter second number :");
+		double n2=s.nextDouble();
+		
+		System.out.println("1. Addition");
+		System.out.println("2. Subtraction");
+		System.out.println("3. Division");
+		System.out.println("4. Multiplication");
+		System.out.println("5. Modulo");
+		
+		System.out.println("Enter your choice!!  (1/2/3/4/5/6)");
+		int choice=s.nextInt();
+		
+		
+		switch(choice)
+		{
+		case 1: System.out.println("Addition of n1 and n2 = "+(n1+n2));
+		        break;
+		case 2: System.out.println("Subtraction of n1 and n2 = "+(n1-n2));
+                break;
+		case 3: System.out.println("Division of n1 and n2 = "+(n1/n2));
+                break;
+		case 4: System.out.println("Multiplication of n1 and n2 = "+(n1*n2));
+                break;
+		case 5: System.out.println("Modulo of n1 and n2 = "+(n1%n2));
+                break;
+		
+        default:System.out.println("Enter a valid number!");
+		        break;
+		}
+		
+	}
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		
+		Arithmetic_Calculator a= new Arithmetic_Calculator();
+		a.display();
+		
+		while(true)
+		{
+	System.out.println("Do you want to continue? (y/n)");
+		char x=sc.next().charAt(0);
+		 
+		if(x=='y')
+		{
+			a.display();
+		}
+		else
+		{
+			System.out.println("Successfully exited!!");
+			break;
+		}
+		
+		}
+		}
+}

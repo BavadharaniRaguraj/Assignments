@@ -1,0 +1,42 @@
+package validationofanemail;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class ValidationofanEmail {
+
+	public void display()
+	{
+		try (Scanner s = new Scanner(System.in)) {
+			ArrayList <String> email=new ArrayList<String>();
+			email.add("def@gmail.com");
+			email.add("xyz@gmail.com");
+			email.add("abc@yahoo.com");
+			email.add("mno@gmail.com");
+			email.add("rst@yahoo.com");
+			
+			System.out.println("Enter an email :");
+			String e=s.nextLine();
+			
+			boolean ans=email.contains(e);
+			
+			if(ans)
+			System.out.println("Your email id is valid!!");
+			else
+				System.out.println("Your email id is not valid!!");
+		}
+	    
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		
+		
+		ValidationofanEmail v=new ValidationofanEmail();
+		
+		
+	    v.display();
+	}
+
+}
