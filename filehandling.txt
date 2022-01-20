@@ -1,0 +1,76 @@
+package filehandling;
+
+import java.io.*;
+import java.util.Scanner;
+
+public class FileHandling {
+	
+
+	public static void main(String[] args) {
+		
+	System.out.println("Adding to file :");
+	fileAdd();
+	
+	System.out.println("\nDisplaying contents :");
+	fileDisplay();
+	
+	System.out.println("\n\nAppending the file :");
+	appendFile();
+	
+	System.out.println("\nAfter appending :");
+	fileDisplay();
+	
+	}
+	private static void appendFile() {
+	try 
+	{
+	FileWriter myFile=new FileWriter("test.txt",true);
+	String str= "Newly added line";
+	
+	System.out.println("The next line to be added is :\n" + str);
+	myFile.write(str);
+	
+	System.out.println("The file has been appended successfully!!");
+	myFile.close();
+	
+	}catch(IOException io) {
+	io.printStackTrace();
+	}
+	
+	}
+	
+	
+	private static void fileDisplay() {
+	try {
+	File myFile=new File("test.txt");
+	try (Scanner s = new Scanner(myFile)) {
+		System.out.println("The content of the file is :");
+		
+		while(s.hasNext()) {
+		String data= s.nextLine();
+		System.out.print(data);
+		}
+	}
+	}catch(IOException io) {
+	System.out.println("An exception occured!!");
+	io.printStackTrace();
+	}
+	}
+	
+	
+	private static void fileAdd() {
+	try {FileWriter myFile=new FileWriter("test.txt");
+	String str ="Hi All.. Welcome!! ";
+	System.out.println("The string added is :\n"+ str);
+	myFile.write(str);
+	System.out.println("The line is added successfully");
+	myFile.close();
+	}catch(IOException io)
+	{ System.out.println("An exception occured!!");
+	io.printStackTrace();
+	}
+	
+	}
+	
+
+}
