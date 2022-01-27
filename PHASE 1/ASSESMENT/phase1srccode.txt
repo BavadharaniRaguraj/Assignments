@@ -1,0 +1,296 @@
+package sample;
+
+import java.io.*;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class employee {
+	
+	
+	// Add Record
+	
+	@SuppressWarnings("resource")
+	public void AddRecord() throws IOException {
+		
+		BufferedWriter bw = new BufferedWriter( new FileWriter("naldrix_db.txt",true) );
+		Scanner strInput = new Scanner(System.in);
+		
+		
+		String ID, name, age, address;
+		
+				
+		System.out.print("Enter Employee ID: ");
+		ID = strInput.nextLine();
+		System.out.print("Enter Employee Name: ");
+		name = strInput.nextLine();
+		System.out.print("Enter Employee Age: ");
+		age = strInput.nextLine();
+		System.out.print("Enter Employee Address: ");
+		address = strInput.nextLine(); 
+		
+		
+		System.out.println("Your record has been added successfully!!");
+		   		
+		bw.write(ID+","+name+","+age+","+address);
+		
+		bw.flush();
+		bw.newLine();
+		bw.close();	
+		
+	
+}   
+	
+	// View Record
+	
+	public void ViewAllRecord() throws IOException {
+    	BufferedReader br = new BufferedReader( new FileReader("naldrix_db.txt") );
+    		
+    	String record;
+    		
+    	System.out.println(" ------------------------------------------------------------- ");
+    	System.out.println(" ID	 Name 	Age	Address 		  ");
+    	System.out.println(" ------------------------------------------------------------- ");
+    		
+    	while( ( record = br.readLine() ) != null ) {
+    			
+    		StringTokenizer st = new StringTokenizer(record,",");
+    			
+    		System.out.println(" "+st.nextToken()+"	 "+st.nextToken()+"   "+st.nextToken()+"	"+st.nextToken());
+	
+    	}
+    		
+    	System.out.println("	                                            	           ");
+    	System.out.println(" ------------------------------------------------------------- ");
+    	br.close();    		
+    		
+    }
+	
+	// Delete Record
+	
+	public void DeleteRecordByID() throws IOException {
+		@SuppressWarnings("resource")
+		Scanner strInput =  new Scanner(System.in);
+		String ID, record;
+		
+		
+		File tempDB = new File("naldrix_db_temp.txt");
+		File db = new File("naldrix_db.txt");
+		
+		
+		BufferedReader br = new BufferedReader( new FileReader( db ) );
+		BufferedWriter bw = new BufferedWriter( new FileWriter( tempDB ) );
+		
+		
+		
+		
+		System.out.println("Enter Employee ID To Delete: ");
+		ID =  strInput.nextLine();
+		
+		
+		while( ( record = br.readLine() ) != null ) {
+			
+			
+			if( record.contains(ID) ) 
+				continue;// to skip the record which we want to delete
+
+			bw.write(record);
+			bw.flush();
+			bw.newLine();
+
+		}
+		
+		br.close();
+		bw.close();
+		
+		db.delete();
+		
+		tempDB.renameTo(db);
+
+}
+     
+	// Search Record
+	
+	public void SearchRecordbyID() throws IOException {
+		String ID,record;
+		@SuppressWarnings("resource")
+		Scanner strInput = new Scanner(System.in);
+		
+		BufferedReader br = new BufferedReader( new FileReader("naldrix_db.txt") );
+		
+		System.out.println(" Search Employee Record\n");
+	
+		
+		System.out.println("Enter the Employee ID: ");
+		ID = strInput.nextLine();
+		
+		
+		
+    	System.out.println(" ------------------------------------------------------------- ");
+    	System.out.println(" ID	 Name 	Age	Address 		  ");
+    	System.out.println(" ------------------------------------------------------------- ");
+    	
+		
+		
+		
+		boolean flag=false;
+		while( ( record = br.readLine() ) != null ) {
+			
+			StringTokenizer st = new StringTokenizer(record,",");
+			if( record.contains(ID) ) {
+				System.out.println("	"+st.nextToken()+"	"+st.nextToken()+" 		"+st.nextToken()+"			"+st.nextToken());
+				flag=true;
+			}
+			
+			
+			
+		}
+		if(flag==false)
+			System.out.println("Record not found");
+		System.out.println(" 	                                            	           ");
+		System.out.println(" ------------------------------------------------------------- ");
+		
+		br.close();
+		
+		
+		
+}
+	
+	// Update Record
+	
+	public void updateRecordbyID() throws IOException {
+		String newName, newAge, newAddr, ID,record2;
+		
+		
+		File tempDB=new File("naldrix_db.txt");
+		File db=new File("naldrix_db_temp.txt");
+		
+		BufferedReader br = new BufferedReader( new FileReader(tempDB) );
+		BufferedWriter bw = new BufferedWriter( new FileWriter(db) );
+		    		
+		@SuppressWarnings("resource")
+		Scanner strInput = new Scanner(System.in);
+		
+		System.out.println(" Update Employee Record\n\n");   
+        System.out.println("Enter ID to be searched");
+        ID=strInput.nextLine(); 	
+		System.out.println("Enter the new Name: ");
+		newName = strInput.nextLine();    		
+		System.out.println("Enter the new Age: ");
+		newAge = strInput.nextLine();  
+		System.out.println("Enter the new Address: ");
+		newAddr = strInput.nextLine();  
+		
+		
+			
+		while( (record2 = br.readLine() ) != null ) {    			
+			if(record2.contains(ID)) {
+				bw.write(ID+","+newName+","+newAge+","+newAddr);
+			} else {
+			
+				bw.write(record2);	
+			}    			
+			bw.flush();
+			bw.newLine();
+		}
+		
+		bw.close();
+		br.close();    		
+		db.delete();    		
+		boolean success = tempDB.renameTo(db);    		
+		System.out.println(success);    		
+		
+}
+
+
+	
+// Main
+
+	public static void main(String[] args) {
+		
+		employee emp=new employee();
+		@SuppressWarnings("resource")
+		Scanner strInput = new Scanner(System.in);
+        String choice,cont = "y";       
+        
+        System.out.println("  Company Lockers Pvt. Ltd.  ");
+        
+        System.out.println("       Developed by :");
+        System.out.println("           - abcd\n");
+        
+        
+        while( cont.equalsIgnoreCase("y") ) {        	
+           System.out.println("Employee Information System\n\n");
+        
+	        System.out.println("1 ==> Add New Employee Record ");
+	        System.out.println("2 ==> View All Employee Record ");	
+	        System.out.println("3 ==> Delete Employee Record ");
+	        System.out.println("4 ==> Search Specific Record ");
+	        System.out.println("5 ==> Update Specific Record ");
+	        System.out.println("6 ==> Exit");
+	    
+	        System.out.print("\n\n");
+	        System.out.print("Enter your choice: ");
+	        choice = strInput.nextLine();
+	        
+	        if( choice.equals("1") ) {
+	        		try {
+						emp.AddRecord();
+					} catch (IOException e) {
+						
+						e.printStackTrace();
+					}
+	        } else if( choice.equals("2") ) {
+        		try {
+					emp.ViewAllRecord();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+            } else if( choice.equals("3") ) {
+    		    try {
+				    emp.DeleteRecordByID();
+			    } catch (IOException e) {
+				
+				    e.printStackTrace();
+			    }
+            } else if( choice.equals("4") ) {
+		        try {
+			        emp.SearchRecordbyID();
+		        } catch (IOException e) {
+			
+			        e.printStackTrace();
+		       }
+            }	else if( choice.equals("5") ) {
+        		  try {
+					  emp.updateRecordbyID();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+            }   else if( choice.equals("6") ) {
+            System.out.println("Thank you!!...\nYou have exited successfully!!");
+            break;
+            }
+            	
+		        	
+	        System.out.println("Do you want to continue? y/n");
+	        cont = strInput.nextLine();
+	       	
+        }
+		
+		
+		
+		
+		
+	}
+}
+
+     
+        
+       
+       
+       
+        
+ 
+
+
