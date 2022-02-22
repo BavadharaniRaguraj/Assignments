@@ -1,0 +1,361 @@
+// index.jsp
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<a href="empform">Add Employee</a>
+<a href="viewemp"> View Employee Details</a>
+</body>
+</html>
+
+
+
+// empform.jsp
+
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="fm"%>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+
+		<h1>Add New Employee</h1>
+       <fm:form method="post" action="save" modelAttribute="emp">  
+      	<table >
+      	<tr>  
+          <td>eid : </td> 
+          <td><fm:input path="eid"  /></td>
+         </tr>  
+         <tr>  
+          <td>Name : </td> 
+          <td><fm:input path="name"  /></td>
+         </tr>  
+         <tr>  
+          <td>Salary :</td>  
+          <td><fm:input path="salary" /></td>
+         </tr> 
+         <tr>  
+          <td>Designation :</td>  
+          <td><fm:input path="designation" /></td>
+         </tr> 
+         <tr>  
+          <td> </td>  
+          <td><input type="submit" value="Save" /></td>  
+         </tr>  
+        </table>  
+       </fm:form>  
+
+
+
+
+// empeditform.jsp
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1> Edit Employee Information </h1>
+<form:form method="post" action="../editsave" modelAttribute="emp">
+id: <form:hidden path="eid"/> <br>
+name: <form:input path="name"/> <br>
+designation: <form:input path="designation"/> <br>
+salary: <form:input path="salary"/> <br>
+<input type="submit" value="Save changes">
+</form:form>
+</body>
+</html>
+
+
+
+// viewemp.jsp
+
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>  
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<table border="2">
+<tr>
+<th>Id</th>
+<th>Name</th>  
+<th>Designation</th>
+<th>Salary</th>
+</tr>
+<c:forEach var="emp" items="${empList}">
+<tr>
+<td>${emp.eid}</td>
+<td>${emp.name}</td>
+<td>${emp.designation}</td>
+<td>${emp.salary}</td>
+<td><a href="editemp/${emp.eid}">Edit</a></td>
+<td><a href="deleteemp/${emp.eid}">Delete</a></td>
+</tr>
+</c:forEach>
+</table>
+</body>
+</html>
+
+
+
+// spring-servlet.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:component-scan base-package="com.springcrud.controller" />
+	
+	  <bean id="viewresolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+    <bean id="ds" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+    
+    <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+    <property name="url" value="jdbc:mysql://localhost:3306/CRUD"/>
+    <property name="username" value="root" />
+    
+    <property name="password" value="Bava@224" />
+    
+    </bean>
+    
+    <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+    <property name="dataSource" ref="ds" />
+    </bean>
+    <bean id="dao" class="com.springcrud.dao.EmployeeDao">
+    <property name="template" ref="jt"/>
+    
+    </bean>
+	</beans>
+
+
+
+// web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee; http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>Spring Crud Operations</display-name>
+  <welcome-file-list>
+    
+    <welcome-file>index.jsp</welcome-file>
+    
+  </welcome-file-list>
+  <servlet>
+  <servlet-name>spring</servlet-name>
+  <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  <servlet-mapping>
+  <servlet-name>spring</servlet-name>
+  <url-pattern>/</url-pattern>
+  </servlet-mapping>
+</web-app>
+
+
+
+// Employee.java
+
+package com.springcrud.beans;
+
+public class Employee {
+	
+	private int eid;
+	private String name,designation;
+	private float salary;
+	public int getEid() {
+		return eid;
+	}
+	public void setEid(int eid) {
+		this.eid = eid;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDesignation() {
+		return designation;
+	}
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+	public float getSalary() {
+		return salary;
+	}
+	public void setSalary(float salary) {
+		this.salary = salary;
+	}
+
+}
+
+
+
+// EmployeeController.java
+
+
+package com.springcrud.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.springcrud.beans.Employee;
+import com.springcrud.dao.EmployeeDao;
+
+@Controller
+public class EmployeeController {
+	@Autowired
+	EmployeeDao dao;
+	@RequestMapping(value="/empform",  method=RequestMethod.GET)
+	public String showForm(Model m){
+		m.addAttribute("emp", new Employee());
+		//System.out.println("show Form");
+		return "empform";
+		
+	}
+	
+	@RequestMapping(value="/save", method=RequestMethod.POST)
+	public String save(@ModelAttribute("emp")Employee emp){
+		dao.insert(emp);
+		return "redirect:/viewemp";
+	}
+	@RequestMapping("/viewemp")
+	public String viewemp(Model m){
+		List<Employee> empList= dao.getEmployeesDetails();
+		/*for(Employee e : empList){
+			System.out.println(e.getEid());
+		}*/
+		m.addAttribute("empList",empList);
+		return "viewemp";
+	}
+	
+	@RequestMapping(value="/editemp/{eid}")
+	public String edit(@PathVariable int eid, Model m){
+		Employee emp=dao.getEmpId(eid);
+		m.addAttribute("emp",emp);
+		return "empeditform";
+	}
+	@RequestMapping(value="/editsave",method=RequestMethod.POST)
+	public String editSave(@ModelAttribute("emp") Employee emp){
+		dao.update(emp);
+		return "redirect:/viewemp";
+	}
+	
+	@RequestMapping(value="/deleteemp/{eid}")
+	public String delete(@PathVariable int eid){
+		dao.delete(eid);
+		return "redirect:/viewemp";
+	}
+	
+}
+
+
+// EmployeeDao.java
+
+
+package com.springcrud.dao;
+
+import java.util.List;
+
+import org.springframework.jdbc.core.JdbcTemplate;
+import com.springcrud.beans.Employee;
+
+public class EmployeeDao {
+	JdbcTemplate template;
+	public void setTemplate(JdbcTemplate template){
+		this.template=template;
+	}
+	public int insert(Employee emp){
+		String sql="insert into Employee(eid,name,designation,salary)values(?,?,?,?)";
+		int ans=template.update(sql,emp.getEid(),emp.getName(),emp.getDesignation(),emp.getSalary());
+		return ans;
+	}
+
+	public int update(Employee emp){
+		String sql="update Employee set name=?, designation=?, salary=? where eid=?";
+		int ans=template.update(sql,emp.getName(),emp.getDesignation(),emp.getSalary(),emp.getEid());
+		return ans;
+	}
+	public int delete(int id){
+		String sql="delete from employee where eid=?";
+		return template.update(sql,id);
+	}
+	public Employee getEmpId(int id){
+		String sql="select * from Employee where eid=?";
+		Employee emp=template.queryForObject(sql,new Object[]{id},new EmployeeMapper());
+		
+		return emp;
+	}
+	
+	public List<Employee> getEmployeesDetails(){
+		String sql="select * from Employee";
+		List<Employee>empList=template.query(sql,new EmployeeMapper());
+		return empList;
+	}
+	
+	
+	
+}
+
+
+
+// EmployeeMapper.java
+
+
+package com.springcrud.dao;
+
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import com.springcrud.beans.Employee;
+
+public class EmployeeMapper implements RowMapper<Employee>{
+
+	@Override
+	public Employee mapRow(ResultSet rs, int rowNum) throws SQLException {
+		Employee employee =new Employee();
+		employee.setEid(rs.getInt("eid"));
+		employee.setName(rs.getString("name"));
+		employee.setDesignation(rs.getString("designation"));
+		employee.setSalary(rs.getFloat("salary"));
+		return employee;
+	}
+
+}
+
+
+
