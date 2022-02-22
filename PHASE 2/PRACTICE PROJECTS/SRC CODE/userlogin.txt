@@ -1,0 +1,195 @@
+//index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Login Form</title>
+</head>
+<body>
+
+
+<h2>LOGIN INFORMATION</h2><br>
+
+<form action="LoginValidation" method="post">
+
+Enter UserName <input type="text" name="txtUname"><br><br>
+Enter Password   <input type="password" name="txtPswd"><br><br>
+<input type="submit" value=SUBMIT>
+
+
+</form>
+
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+//LoginValidation.java
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+
+@WebServlet("/LoginValidation")
+public class LoginValidation extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+    
+    public LoginValidation() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String uname=request.getParameter("txtUname");
+		String pword=request.getParameter("txtPswd");
+		if(uname.equalsIgnoreCase("java") && pword.equals("eclipse@123")) {
+			HttpSession session=request.getSession(true);
+			session.setAttribute("Username", uname);
+			RequestDispatcher rd=request.getRequestDispatcher("WelcomeServlet");
+			rd.forward(request, response);
+		}
+		else
+		{
+			PrintWriter out=response.getWriter();// out object prints output on Web Browser
+			out.println("<h3>invalid username and Password</h3>");
+			RequestDispatcher rd=request.getRequestDispatcher("index.html");
+			rd.include(request, response);
+			
+		}
+		
+		
+	}
+	
+
+}
+
+
+
+
+
+// WelcomeServlet.java
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+
+@WebServlet("/WelcomeServlet")
+public class WelcomeServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+    public WelcomeServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+		HttpSession session=request.getSession(false);
+		String uname=(String)session.getAttribute("Username");
+		PrintWriter out=response.getWriter();
+		out.println("<h2>DASHBOARD</h2><br>");
+		out.print("Welcome<b><h3>"+uname+"</h3><b>");
+		out.println("<a href='LogoutServlet'><br><br>Log out</a>");
+		
+	
+		
+		
+	}
+
+}
+
+
+
+
+//LogoutServlet.java
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+/**
+ * Servlet implementation class LogoutServlet
+ */
+@WebServlet("/LogoutServlet")
+public class LogoutServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LogoutServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
+		HttpSession session=request.getSession(false);
+		session.invalidate();
+		PrintWriter out=response.getWriter();
+		out.println("Thank you for using website!!");
+	}
+
+		
+	
+
+}
+
+
+//web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  
+  
+  
+  <display-name>ProjectWebSite</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    
+    
+  </welcome-file-list>
+</web-app>

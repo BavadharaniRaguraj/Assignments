@@ -1,0 +1,537 @@
+// index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>FLY AWAY</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+
+<div class="container p-6">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+         <center><h2>FLY AWAY</h2></center>
+        <form action="Booking.html" >
+        
+        <div class="form-group">
+        <label>Date Of Travel</label>
+        <input type="date" name="txtdot" class="form-control" placeholder="dd-mm-yyyy" required>
+        </div>
+        
+        
+        <div class="form-group">
+        <label>Source</label>
+        <input type="text" name="txtsource" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+        <label>Destination</label>
+        <input type="text" name="txtdest" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+        <label>No Of Persons</label>
+        <input type="number" name="txtnop" class="form-control">
+        </div>
+        
+        
+        
+        <button class="btn btn-success">BOOK NOW</button>
+        
+        </form>
+        
+       
+        </div>
+      </div>
+    </div>
+  </div>
+  
+   <h4>Admin?</h4>
+        <h6><a href="adminpage.html">click here!!</a></h6>
+        
+  
+</div>
+
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+// Booking.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>booking</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<form action="booking" method="post">
+        
+        
+        <div class="container p-6">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+        <div class="form-group">
+        <label>First Name</label>
+        <input type="text" name="txtfname" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" name="txtlname" class="form-control" required>
+        </div>
+        
+        
+        <div class="form-group">
+        <label> Gender</label>
+        <input type="text" name="txtgender" placeholder="male/female" class="form-control" required>
+  
+        </div>
+        
+        <div class="form-group">
+        <label>Date Of Birth</label>
+        <input type="date" name="txtdob" class="form-control" >
+        </div>
+        
+        <div class="form-group">
+        <label>Date Of Travel</label>
+        <input type="date" name="txtdot" class="form-control" placeholder="dd-mm-yyyy" required>
+        </div>
+        
+        <div class="form-group">
+        <label>Source</label>
+        <input type="text" name="txtsource" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+        <label>Destination</label>
+        <input type="text" name="txtdest" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+        <label>No Of Persons</label>
+        <input type="number" name="txtnop" class="form-control">
+        </div>
+        
+        
+        <div class="form-group">
+        <label >Price</label>
+        <input type="text" name="txtprice" placeholder="1000/1500/2000/2500" class="form-control" required>
+        </div>
+        
+       <button class="btn btn-success">BOOK NOW</button>
+       
+       </div>
+       </div>
+       </div>
+       </div>
+       </div>
+       
+       
+       
+        </form>
+
+
+
+</body>
+</html>
+
+
+
+
+
+// booking.java
+
+package com.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.Types;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/booking")
+public class booking extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+		
+		String fname=request.getParameter("txtfname");
+		String lname=request.getParameter("txtlname");
+		String gender=request.getParameter("txtgender");
+		String dob=request.getParameter("txtdob");
+		String dot=request.getParameter("txtdot");
+		String source=request.getParameter("txtsource");
+		String dest=request.getParameter("txtdest");
+		
+		int nop=Integer.parseInt(request.getParameter("txtnop"));
+		int price=Integer.parseInt(request.getParameter("txtprice"));
+		int res=price*nop;
+		
+		
+		try {
+			
+			//2) Create Con Connection
+			Connection con=DBConnection.getMyConnection();
+			
+			//3)  Call Procedure
+			CallableStatement stmt=con.prepareCall("{call flights(?,?,?,?,?,?,?)}");
+		    stmt.setString(1,dot);
+		    stmt.setString(2,source);
+		    stmt.setString(3,dest);
+		   
+		    stmt.registerOutParameter(4,Types.INTEGER);
+		    stmt.registerOutParameter(5,Types.INTEGER);
+		    stmt.registerOutParameter(6,Types.VARCHAR);
+		    stmt.registerOutParameter(7,Types.VARCHAR);
+		    
+		    stmt.execute();
+		 
+			
+		
+		response.setContentType("text/HTML");
+		PrintWriter out=response.getWriter();
+		
+		out.print("<h4>FIRST NAME : "+fname+"</h4>");
+		out.print("<h4>LAST NAME : "+lname+"</h4>");
+		out.println("<h4>GENDER : "+gender+"</h4>");
+		out.println("<h4>DATE OF BIRTH : "+dob+"</h4>");
+		out.println("<h4>SOURCE : "+source+"</h4>");
+		out.println("<h4>DESTINATION : "+dest+"</h4>");
+		out.println("<h4>NUMBER OF PERSONS AVAILABLE : "+stmt.getInt(4));
+		out.println("<h4>FLIGHT NUMBER : "+stmt.getInt(5)+"</h4>");
+		out.println("<h4>DEPARTURE TIME : "+stmt.getString(6)+"</h4>");
+		out.println("<h4>ARRIVAL TIME : "+stmt.getString(7)+"</h4>");
+	     
+		out.println("<h4>NO.OF.PERSONS BOOKED : "+nop+"</h4>");
+		
+		double res1=2000*nop;
+		
+		out.print("<h4>TOTAL PRICE : Rs."+res1+"</h4>");
+		
+		out.println("<h2>Successfully Booked!! Have a Happy Journey!!<h2>");
+		con.close();
+		}
+		catch(Exception e) {
+				e.printStackTrace();
+		}
+
+		
+	}
+
+}
+
+
+/*
+mysql> delimiter $$
+mysql> create procedure flights(in p_dot varchar(20), in p_source varchar(20), in p_dest varchar(20), out p_nop int, out p_flightno int, out p_departure varchar(20), out p_arrival varchar(20))
+    -> begin
+    -> select nop into p_nop from flights where dot=p_dot and source=p_source and dest=p_dest;
+    -> select flightno into p_flightno from flights where dot=p_dot and source=p_source and dest=p_dest;
+    -> select departure into p_departure from flights where dot=p_dot and source=p_source and dest=p_dest;
+    -> select arrival into p_arrival from flights where dot=p_dot and source=p_source and dest=p_dest;
+    -> end$$
+Query OK, 0 rows affected (0.48 sec)
+
+*/
+
+ 
+
+
+// adminpage.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>ADMIN PAGE</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+
+<div class="container p-4">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+        <center>
+        <h2>ADMIN PAGE</h2><br>
+        <a href="addflights.html">ADD FLIGHTS</a>
+        <br><br>
+        <a href="viewflightservlet">VIEW FLIGHTS</a>
+        </center>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+</body>
+</html>
+
+
+ 
+
+
+// addflights.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Adding Flights</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+
+<div class="container p-6">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+         <center><h2>FLY AWAY</h2></center>
+        <form action="addflightservlet" action="post" >
+        
+        <div class="form-group">
+        <label>Date</label>
+        <input type="date" name="txtdate" class="form-control" placeholder="dd-mm-yyyy" required>
+        </div>
+        
+        <div class="form-group">
+        <label>Source</label>
+        <input type="text" name="txtsource" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+        <label>Destination</label>
+        <input type="text" name="txtdest" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+        <label>No Of Persons</label>
+        <input type="number" name="txtnop" class="form-control">
+        </div>
+        
+        <div class="form-group">
+        <label>Flight No</label>
+        <input type="date" name="txtfno" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+        <label>Departure</label>
+        <input type="date" name="txtdep" class="form-control" required>
+        </div>
+        
+        <div class="form-group">
+        <label>Arrival</label>
+        <input type="date" name="txtarr" class="form-control" required>
+        </div>
+        
+        <button class="btn btn-info">ADD</button>
+        
+        </form>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+</body>
+</html>
+
+    
+    
+ 
+// viewflightservlet.java
+
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class viewflightservlet
+ */
+@WebServlet("/viewflightservlet")
+public class viewflightservlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public viewflightservlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		try {
+			
+				Connection con=DBConnection.getMyConnection();
+			
+				String str="select * from flights";
+				
+				
+				Statement  ps=con.createStatement();
+				
+				ResultSet ans =ps.executeQuery(str);
+				
+				PrintWriter out=response.getWriter();
+				out.println("<table border=2>");
+				out.println("<tr><th>DATE</th><th>SOURCE</th><th>DESTINATION</th><th>NO.OF.PERSONS</th><th>FLIGHTNO</th><th>DEPARTURE</th><th>ARRIVAL</th></tr>");
+				while(ans.next()) {
+					out.println("<tr>");
+					out.print("<td>"+ans.getString("dot")+"</td>");
+					out.print("<td>"+ans.getString("source")+"</td>");
+					out.print("<td>"+ans.getString("dest")+"</td>");
+					out.print("<td>"+ans.getInt("nop")+"</td>");
+					out.print("<td>"+ans.getInt("flightno")+"</td>");
+					out.print("<td>"+ans.getString("departure")+"</td>");
+					out.print("<td>"+ans.getString("arrival")+"</td>");
+					
+					out.println("</tr>");
+				}
+				out.println("</table>");
+				con.close();
+			
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		
+		
+		
+		
+		
+	}
+
+}
+
+
+// DBConnection.java
+
+package com.servlet;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+public class DBConnection {
+	
+	
+	static Connection con=null;
+	public static Connection getMyConnection() {
+		try{  
+			//step1 load the driver class  
+			Class.forName("com.mysql.cj.jdbc.Driver");  //com.mysql.jdbc.driver //com.mysql.cj.jdbc.Driver  //oracle.jdbc.driver.OracleDriver
+			 
+			//step2 create  the connection object 
+			 
+		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/FlyAway","root","Bava@224");  
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+	
+		return con;
+		
+		}
+	
+
+}
+
+
+
+// web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<element>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee; http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>FlyAway</display-name>
+  
+  
+  <servlet>
+  
+  <servlet-name>Booking</servlet-name>
+  <servlet-class>com.servlet.booking</servlet-class>
+  
+  </servlet>
+  
+  
+  <servlet-mapping>
+  
+  <servlet-name>Booking</servlet-name>
+  <url-pattern>/booking</url-pattern>  
+  
+  </servlet-mapping>
+  
+  
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    
+  </welcome-file-list>
+</web-app>
+</element>    
+     
+
+

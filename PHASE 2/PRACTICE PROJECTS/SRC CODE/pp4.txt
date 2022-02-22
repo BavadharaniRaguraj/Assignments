@@ -1,0 +1,136 @@
+// index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>PRODUCTS PORTAL</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+</head>
+<body>
+
+<div class="container p-5">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card">
+        <div class="card-body">
+        
+        <form method="post" action="details" >
+        
+        <div class="form-group">
+        <label>Enter Product ID</label>
+        <input type="text" name="pid" class="form-control">
+        </div>
+        
+        
+        <div class="form-group">
+        <label>Enter Product Name</label>
+        <input type="text" name="pname" class="form-control">
+        </div>
+        
+        <div class="form-group">
+        <label>Enter Product Price</label>
+        <input type="text" name="pprice" class="form-control">
+        </div>
+        
+        
+        <button class="btn btn-success">SAVE</button>
+        
+        
+        
+        </form>
+        
+        
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+//DetailsServlet.java
+
+package com.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+public class DetailsServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		int pid=Integer.parseInt(request.getParameter("pid"));
+		String pname=request.getParameter("pname");
+		double pprice=Double.parseDouble(request.getParameter("pprice"));
+		
+		response.setContentType("text/HTML");
+		PrintWriter out=response.getWriter();
+		
+		out.print("<h4>PRODUCT ID : "+pid+"</h4>");
+		out.print("<h4>PRODUCT NAME : "+pname+"</h4>");
+		out.print("<h4>PRODUCT PRICE : Rs."+pprice+"</h4>");
+		
+	}
+	
+	
+
+}
+
+
+
+
+//web.xml
+
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee; http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+  <display-name>ProductDetailsPortal</display-name>
+  
+  <servlet>
+  
+  <servlet-name>Details</servlet-name>
+  <servlet-class>com.servlet.DetailsServlet</servlet-class>
+  
+  </servlet>
+  
+  
+  <servlet-mapping>
+  
+  <servlet-name>Details</servlet-name>
+  <url-pattern>/details</url-pattern>  
+  
+  </servlet-mapping>
+  
+  
+  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    
+  </welcome-file-list>
+</web-app>
