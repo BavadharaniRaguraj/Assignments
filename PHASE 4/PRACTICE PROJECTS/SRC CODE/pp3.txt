@@ -1,0 +1,547 @@
+// app-routing.module.ts
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+
+import {SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
+const routes: Routes = [
+  {path:'signin',
+component:SigninComponent},
+{path:'signup',
+component:SignupComponent},
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { 
+
+}
+
+
+// app.component.html
+
+
+  <button mat-raised-button style="float: right;">SIGNUP</button>
+<button mat-raised-button style="float: right;">SIGNIN</button>
+
+
+<div class="mainDiv">
+  <div class="topDiv">
+    <h1 class="title">Porfolio</h1>
+  </div>
+  <div class="contentAreaDiv">
+    <section class="socialDiv">
+      <p>My name is Bava!</p>
+      <div class="icon">
+        <span><a href="https://github.com/"><img src="../assets/iconfinder_github_circle_gray_107139.svg" alt="github icon"></a></span>
+        <span><a href="https://Twitch.com/"><img src="../assets/iconfinder_1_Twitch_colored_svg_5296513.svg" alt="Twitch Icon"></a></span>
+      </div>
+    </section>
+    <section class="mainContentDiv">
+      <div class="summaryDiv">
+        <div style="display: flex; flex-direction: row;">
+          <hr>
+          <p style="font-size: large;">Summary</p>
+          <hr>
+         </div>
+         <p>This is my summary! Add yours here.</p>
+      </div>
+      <div class="resumeDiv">
+        <div style="display: flex; flex-direction: row;">
+          <hr>
+          <p style="font-size: large;">Resume</p>
+          <hr>
+         </div>
+         <p>link to resume!</p>
+      </div>
+      <div class="projectDiv">
+        <div style="display: flex; flex-direction: row;">
+          <hr>
+          <p style="font-size: large;">Projects</p>
+          <hr>
+         </div>
+      </div>
+      <div class="projectsDiv">
+        <mat-card class="project">
+          Project 1 - Data Miner
+          <ul>
+            <li>Python</li>
+            <li>Miner 10GB/day</li>
+            <li>Runs on AWS</li>
+          </ul>
+          <button mat-raised-button>To Source Code</button>
+        </mat-card>
+        <mat-card class="project">
+          Project 1 - Data Miner
+          <ul>
+            <li>Python</li>
+            <li>Miner 10GB/day</li>
+            <li>Runs on AWS</li>
+          </ul>
+          <button mat-raised-button>To Source Code</button>
+        </mat-card>
+        <mat-card class="project">
+          Project 1 - Data Miner
+          <ul>
+            <li>Python</li>
+            <li>Miner 10GB/day</li>
+            <li>Runs on AWS</li>
+          </ul>
+          <button mat-raised-button>To Source Code</button>
+        </mat-card>
+      </div>
+    </section>
+  </div>
+
+
+<router-outlet></router-outlet>
+
+
+
+// app.component.scss
+
+
+.mainDiv{
+  height: 100%;
+  width: 100%;
+
+  p{
+    color: var(--primary-color);
+    text-align: center;
+  }
+
+  .topDiv{
+    display: flex;
+    height: 82.5px;
+    width: 100%;
+    justify-content: center;
+    box-shadow: 0 8px 6px -6px #7d4446;
+
+    .title{
+      font-size: 56px;
+      margin-top: 35px;
+      color: var(--primary-color);
+      text-shadow: 1px 1px 10px var(--primary-shadow), 1px 1px 10px var(--primary-shadow);
+    }
+
+  }
+
+  .contentAreaDiv{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    .socialDiv{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 10px;
+      text-align: center;
+
+      .icon{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        img{
+          width: 67px;
+        }
+
+        img:hover{
+          filter: invert(27%)
+                  sepia(51%)
+                  saturate(2878%)
+                  hue-rotate(346deg)
+                  brightness(104%)
+                  contrast(97%);
+        }
+
+      }
+    }
+
+    .mainContentDiv{
+      background-color: var(--background-secondary);
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: auto;
+      padding: 10px;
+      padding-top: 20px;
+
+
+
+      hr{
+        background-color: var(--secondary-color);
+        height: 1px;
+        border: none;
+        width: 100%;
+      }
+
+      .projectsDiv{
+
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .project{
+          display: flex;
+          flex-direction: column;
+          margin: 5px;
+          width: 200px;
+          height: auto;
+          background-color: var(--secondary-color);
+          color: var(--primary-color);
+
+          button{
+            background-color: var(--background-main);
+            color: var(--primary-color);
+          }
+
+        }
+
+      }
+
+     }
+
+  }
+
+  @media only screen and (min-width: 1080px){
+
+    .contentAreaDiv{
+      flex-direction: row;
+
+      .socialDiv{
+        justify-content: flex-start;
+        width: 15%;
+        padding-top: 5%;
+
+        .icon{
+          flex-direction: column;
+        }
+
+      }
+
+
+
+
+
+
+    }
+
+    .topDiv{
+      position: relative;
+    }
+
+
+
+  }
+
+}
+
+
+
+// app.component.spec.ts
+
+import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+
+describe('AppComponent', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule
+      ],
+      declarations: [
+        AppComponent
+      ],
+    }).compileComponents();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it(`should have as title 'portfoli-live'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('portfoli-live');
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.content span').textContent).toContain('portfoli-live app is running!');
+  });
+});
+
+
+
+// app.component.ts
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
+})
+export class AppComponent {
+  [x: string]: any;
+  title = 'portfoli-live';
+
+
+}
+
+
+
+// app.module.ts
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { SigninComponent } from './signin/signin.component';
+import { SignupComponent } from './signup/signup.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    SigninComponent,
+    SignupComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    NoopAnimationsModule,
+    MatButtonModule,
+    MatCardModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+// index.html
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PortfoliLive</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body class="mat-typography">
+  <app-root></app-root>
+</body>
+</html>
+
+
+
+// styles.scss
+
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body {
+    --primary-color: #78d0cf;
+    --background-main: #141414;
+    --background-secondary: #1b1b1b;
+    --secondary-color: #7d4446;
+    --primary-shadow: #18505d;
+
+      margin: 0;
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+      background-color: var(--background-main);
+   }
+
+
+// signin.component.html
+
+<div>
+    <div class="jumbotron" style="margin: 45px">
+        <h2 style="text-align: center;padding-top: 5%">Login</h2>
+        <p style="text-align: center">Enter the registered E-mail address and the password!</p>
+        <form action="">
+          <div class="container">
+            <p style="text-align: center;padding-bottom: 20px">
+               E-mail <input type="text" name="email" placeholder="Confirm email address" email required style="padding-right: 60px;margin-left: 35px" ></p>
+                </div>
+           <div class="container">
+            <p style="text-align: center">
+           Password <input type="text" name="email" placeholder="Password" required style="padding-right: 60px;margin-left: 15px"> <br>
+            <button class="btn btn-primary" style="margin-top: 20px"> Login</button></p>          
+          </div>
+        
+  
+        </form>
+  
+    </div>
+  
+  
+  
+  </div>
+<router-outlet></router-outlet>
+
+
+// signin.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SigninComponent } from './signin.component';
+
+describe('SigninComponent', () => {
+  let component: SigninComponent;
+  let fixture: ComponentFixture<SigninComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ SigninComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SigninComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+
+
+// signin.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.scss']
+})
+export class SigninComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+
+// signup.component.scss
+
+
+.ima{
+
+    height: 40px;
+    width: 40px;
+    
+    }
+
+
+
+// signup.component.html
+
+    
+<div>
+    <div class="jumbotron" style="margin: 25px">
+        <h2 style="text-align: center;padding-top: 5%">Register</h2>
+        <p style="text-align: center">Enter the valid E-mail address and the password!</p>
+        <form action="">
+          <div class="container">
+            <p style="text-align: center;padding: 20px">
+            E-mail <input type="text" name="email" placeholder="Email address" email required style="padding-right: 60px;margin-left: 80px"></p>
+            <p style="text-align: center;padding-bottom: 20px">
+              Reconfirm E-mail <input type="text" name="email" placeholder="Confirm email address" email required style="padding-right: 60px;margin-left: 5px" ></p>
+                </div>
+           <div class="container">
+            <p style="text-align: center">
+           Password <input type="text" name="email" placeholder="Password" required style="padding-right: 60px;margin-left: 55px;margin-bottom: 20px"> <br>
+            <button class="btn btn-primary" style="margin-top: 20px"> Register</button></p>          
+          </div>
+        </form>
+    </div>
+  </div>
+  <router-outlet></router-outlet>
+
+
+
+// signup.component.spec.ts
+
+
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SignupComponent } from './signup.component';
+
+describe('SignupComponent', () => {
+  let component: SignupComponent;
+  let fixture: ComponentFixture<SignupComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ SignupComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SignupComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+
+
+// signup.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
+})
+export class SignupComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}

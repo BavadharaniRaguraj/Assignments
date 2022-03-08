@@ -1,0 +1,94 @@
+// Creating a new project
+
+ng new angular-app
+
+ 
+// Move the code to the application folder and start the server.
+cd angular-app
+ng serve
+
+// Creating Angular components
+
+	Open Visual Studio Code
+	Navigate to the created angular-app project folder.
+
+  	Add the following code in app.module.ts.
+       
+            import{BrowserModule}from '@angular/platform browser';
+            import{NgModule}from '@angular/core';
+            import{AppComponent}from ./app.component;
+            @NgModule({
+              declarations:[
+              AppComponent
+              ],              
+              imports:[
+              BrowserModule
+              ],
+              providers:[],
+              bootstrap:[AppComponent]
+              })
+            export class AppModule{}
+
+ 
+
+	Create a folder called products inside the src/app folder.
+	Create a product-list.component.html file in the products folder.
+	Add the following code to product-list.component.html.
+              <h1> Product List Page </h1>
+
+
+	Create a file called  product-list.component.ts.
+
+            import{Component}from '@angular/core';
+            @Component({
+            selector:'product-list',
+            templateUrl:'./product-list.component.html'
+            })
+
+            export class ProductListComponent{
+            pageTitle:string="Product List Page"
+            }
+
+
+        Add the following code in app.module.ts.
+ 
+             import{BrowserModule}from '@angular/platform browser';
+            import{NgModule}from '@angular/core';
+            import{AppComponent}from ./app.component;
+            import{ProductListComponent}from './products/product-list.component';
+            @NgModule({
+              declarations:[
+              AppComponent,
+              ProductListComponent
+              ],              
+              imports:[
+              BrowserModule
+              ],
+              providers:[],
+              bootstrap:[AppComponent]
+              })
+            export class AppModule{}
+
+
+
+
+ 
+	Add the following code in app.component.ts.
+ 
+            import{Component}from '@angular/core';
+            @Component({
+            selector:'app-root',
+            template:
+            <product-list></product-list>
+            ,
+            styleUrls:['./app.component.css']
+            })
+
+            export class AppComponent{
+            title='angular-app';
+            }
+
+
+	By saving the above changes and starting the server, you will be able to see the output.
+
+

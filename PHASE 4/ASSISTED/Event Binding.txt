@@ -1,0 +1,28 @@
+// Implementing event binding
+
+	Open Visual Studio Code
+	Call toggleImage() when any button is clicked in Product-list.component.html.
+	Add the following code in Product-list.component.ts.
+
+export class ProductListComponent{
+   pageTitle: string = "Product List Page";
+   imageWidth:number = 80;
+   imageMargin:number = 10;
+
+   showImage:boolean = false;
+
+   toggleImage() : void {
+       this.showImage = !this.showImage;
+       // (!false = true) // (!true == false)
+ console.log('Value of ShowImage inside function ::',                              this.showImage);   
+   }
+
+}
+
+	Add the following code in Product-list.component.html.
+
+  <button class="btn btn-primary" (click)='toggleImage()'>
+      Show Image
+  </button>
+
+

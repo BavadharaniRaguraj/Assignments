@@ -1,0 +1,1188 @@
+// angular.json
+
+{
+    "id": 1,
+    "name": "Angular Online Quiz",
+    "description": "Angular Quiz (based on basic concepts)",
+    "questions": [
+        {
+            "id": 1010,
+            "name": "Which of the following is not a core AngularJS directive.",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "ng-app",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "ng-model",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "ng-bind",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "ng-state",
+                    "isAnswer": true
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1011,
+            "name": "Which of the following is true about lowercase filter?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "Lowercase filter converts a text to lower case text.",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "Lowercase filter is a function which takes text as input.",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "Both of the above.",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "None of the above.",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1012,
+            "name": " Who is sometimes called as father of Angularjs?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "Brad Green",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "Misko Hevery",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "Brad Richardson",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "Chuck Jazdzewski",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1013,
+            "name": "Which of the following is correct about TypeScript?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "Angular is based on TypeScript.",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "This is a superset of JavaScript.",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "TypeScript is maintained by Microsoft.",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "All of the above.",
+                    "isAnswer": true
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1014,
+            "name": "What is the decorator used for configuring your module class?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "@NgModule",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "@NgApp",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "Both",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "None of above",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1015,
+            "name": "Which angular decorator allows us to define the pipe name that is globally available for use in any template in the across application?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "pipeName",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "pipeDeco",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "Pipe",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "None of the above",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1016,
+            "name": "Router is part of which of the following module?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "@angular/core",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "@angular/router",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "Both",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "None of the above",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1017,
+            "name": "Which character is used for chaining multiple pipes?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "|",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": ":",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "Both",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "None of the above",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1018,
+            "name": "What does AOT stand for?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "ahead-of-time compilation",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "Angular Object Templates",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "Angular Object Templates",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "None of the above",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1019,
+            "name": "Which of the following is correct about package.json?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "This file is used to give the options about TypeScript used for the Angular JS project.",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "This file contains information about Angular project.",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "This file contains the system files required for Angular JS application.",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "All of the above.",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        }
+    ]
+}
+
+
+
+// javascript.json
+
+
+{
+    "id": 1,
+    "name": "JSON Online Quiz",
+    "description": "JSON Quiz (Basic Multiple Choice Questions for Developers)",
+    "questions": [
+        {
+            "id": 1010,
+            "name": "JSON Stands for ________?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "Java Standard Output Network",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "JavaScript Object Notation",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "JavaScript Output Name",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "Java Source Open Network",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1011,
+            "name": "Which of the following is not a type in JSON ?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "date",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "object",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "Array",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "string",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1012,
+            "name": "Who is the Father of JSON?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "Douglas Crockford",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "Rasmus Lerdorf",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "Douglas Michel",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "Dennis Ritchie",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1013,
+            "name": "What extension is used to save a JSON file?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": ".json",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": ".js",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": ".javaN",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": ".on",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1014,
+            "name": "JSON string have used in ____________",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "Duoble Quote",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "Single Quote",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "Both 1 & 2",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "None of the above",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1015,
+            "name": "JSON elements are separated by the ______",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "line break",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "Semi-Colon",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "comma",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "white-space",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1016,
+            "name": "The MIME type of JSON is _____",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "application/json",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "application/x-json",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "application/javascript",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "text/json",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1017,
+            "name": "What is the common usage of JSON on modern websites?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "To store information remotely",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "To send and receive bits of data",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "To store information locally",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "All of the Above",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1018,
+            "name": "Which of the following code will throw an error?",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "JSON.parse(‘{}’);",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "JSON.parse(null);",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "JSON.parse(undefined);",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "JSON.parse(‘[]’);",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        },
+        {
+            "id": 1019,
+            "name": "_______ is not a valid way to parse JSON string",
+            "questionTypeId": 1,
+            "options": [
+                {
+                    "id": 1055,
+                    "questionId": 1010,
+                    "name": "JSON.parse()",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1056,
+                    "questionId": 1010,
+                    "name": "JSON.eval()",
+                    "isAnswer": true
+                },
+                {
+                    "id": 1057,
+                    "questionId": 1010,
+                    "name": "jQuery.parseJSON()",
+                    "isAnswer": false
+                },
+                {
+                    "id": 1058,
+                    "questionId": 1010,
+                    "name": "None of the above",
+                    "isAnswer": false
+                }
+            ],
+            "questionType": {
+                "id": 1,
+                "name": "Multiple Choice",
+                "isActive": true
+            }
+        }
+    ]
+}
+
+
+
+// quiz.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+
+import { QuizService } from '../services/quiz.service';
+import { HelperService } from '../services/helper.service';
+import { Option, Question, Quiz, QuizConfig } from '../models/index';
+
+@Component({
+  selector: 'app-quiz',
+  templateUrl: './quiz.component.html',
+  styleUrls: ['./quiz.component.css'],
+  providers: [QuizService]
+})
+export class QuizComponent implements OnInit {
+  quizes: any[];
+  quiz: Quiz = new Quiz(null);
+  mode = 'quiz';
+  quizName: string;
+  config: QuizConfig = {
+    'allowBack': true,
+    'allowReview': true,
+    'autoMove': false,  // if true, it will move to next question automatically when answered.
+    'duration': 600,  // indicates the time (in secs) in which quiz needs to be completed. 0 means unlimited.
+    'pageSize': 1,
+    'requiredAll': false,  // indicates if you must answer all the questions before submitting.
+    'richText': false,
+    'shuffleQuestions': false,
+    'shuffleOptions': false,
+    'showClock': false,
+    'showPager': true,
+    'theme': 'none'
+  };
+
+  pager = {
+    index: 0,
+    size: 1,
+    count: 1
+  };
+  timer: any = null;
+  startTime: Date;
+  endTime: Date;
+  ellapsedTime = '00:00';
+  duration = '';
+
+  constructor(private quizService: QuizService) { }
+
+  ngOnInit() {
+    this.quizes = this.quizService.getAll();
+    this.quizName = this.quizes[0].id;
+    this.loadQuiz(this.quizName);
+  }
+
+  loadQuiz(quizName: string) {
+    this.quizService.get(quizName).subscribe(res => {
+      this.quiz = new Quiz(res);
+      this.pager.count = this.quiz.questions.length;
+      this.startTime = new Date();
+      this.ellapsedTime = '00:00';
+      this.timer = setInterval(() => { this.tick(); }, 1000);
+      this.duration = this.parseTime(this.config.duration);
+    });
+    this.mode = 'quiz';
+  }
+
+  tick() {
+    const now = new Date();
+    const diff = (now.getTime() - this.startTime.getTime()) / 1000;
+    if (diff >= this.config.duration) {
+      this.onSubmit();
+    }
+    this.ellapsedTime = this.parseTime(diff);
+  }
+
+  parseTime(totalSeconds: number) {
+    let mins: string | number = Math.floor(totalSeconds / 60);
+    let secs: string | number = Math.round(totalSeconds % 60);
+    mins = (mins < 10 ? '0' : '') + mins;
+    secs = (secs < 10 ? '0' : '') + secs;
+    return `${mins}:${secs}`;
+  }
+
+  get filteredQuestions() {
+    return (this.quiz.questions) ?
+      this.quiz.questions.slice(this.pager.index, this.pager.index + this.pager.size) : [];
+  }
+
+  onSelect(question: Question, option: Option) {
+    if (question.questionTypeId === 1) {
+      question.options.forEach((x) => { if (x.id !== option.id) x.selected = false; });
+    }
+
+    if (this.config.autoMove) {
+      this.goTo(this.pager.index + 1);
+    }
+  }
+
+  goTo(index: number) {
+    if (index >= 0 && index < this.pager.count) {
+      this.pager.index = index;
+      this.mode = 'quiz';
+    }
+  }
+
+  isAnswered(question: Question) {
+    return question.options.find(x => x.selected) ? 'Answered' : 'Not Answered';
+  };
+
+  isCorrect(question: Question) {
+    return question.options.every(x => x.selected === x.isAnswer) ? 'correct' : 'wrong';
+  };
+
+  onSubmit() {
+    let answers = [];
+    this.quiz.questions.forEach(x => answers.push({ 'quizId': this.quiz.id, 'questionId': x.id, 'answered': x.answered }));
+
+    // Post your data to the server here. answers contains the questionId and the users' answer.
+    console.log(this.quiz.questions);
+    this.mode = 'result';
+  }
+}
+
+
+
+// quiz.service.ts
+
+
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class QuizService {
+
+  constructor(private http: HttpClient) { }
+
+  get(url: string) {
+    return this.http.get(url);
+  }
+
+  getAll() {
+    return [
+      { id: 'data/angular.json', name: 'Angular' },
+      { id: 'data/javascript.json', name: 'JavaScript' },
+    ];
+  }
+
+}
+
+
+
+// quiz.component.html
+
+  <div class="row">
+    <div class="col-6">
+      <h2>Online Test Application</h2>
+    </div>
+    <div class="col-6 text-right">
+      Select Quiz Type:
+      <select [(ngModel)]="quizName" (change)="loadQuiz(quizName)">
+        <option *ngFor="let quiz of quizes" [value]="quiz.id">{{quiz.name}}</option>
+      </select>
+    </div>
+  </div>
+  <div id="quiz">
+    <h2 class="text-center font-weight-normal">{{quiz.name}}</h2>
+    <hr />
+
+    <div *ngIf="mode=='quiz' && quiz">
+      <div *ngFor="let question of filteredQuestions;">
+        <div class="badge badge-info">Question {{pager.index + 1}} / {{pager.count}}.</div>
+        <div *ngIf="config.duration" class="badge badge-info float-right">Time: {{ellapsedTime}} / {{duration}}</div>
+        <h3 class="font-weight-normal">{{pager.index + 1}}.
+          <span [innerHTML]="question.name"></span>
+        </h3>
+        <div class="row text-left options">
+          <div class="col-6" *ngFor="let option of question.options">
+            <div class="option">
+              <label class="font-weight-normal" [attr.for]="option.id">
+                <input id="{{option.id}}" type="checkbox" [(ngModel)]="option.selected" (change)="onSelect(question, option);" /> {{option.name}}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="text-center">
+        <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(0);">First</button>
+        <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.index - 1);">Prev</button>
+        <button class="btn btn-primary" (click)="goTo(pager.index + 1);">Next</button>
+        <button class="btn btn-default" *ngIf="config.allowBack" (click)="goTo(pager.count - 1);">Last</button>
+        <!-- <pagination *ngIf="config.showPager" direction-links="false" total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" ng-change="pageChanged()"></pagination> -->
+      </div>
+    </div>
+
+    <div class="row text-center" *ngIf="mode=='review'">
+      <div class="col-4 cursor-pointer" *ngFor="let question of quiz.questions; let index = index;">
+        <div (click)="goTo(index)" class="p-3 mb-2 {{ isAnswered(question) == 'Answered'? 'bg-info': 'bg-warning' }}">{{index + 1}}. {{ isAnswered(question) }}</div>
+      </div>
+    </div>
+    <div class="result" *ngIf="mode=='result'">
+      <h2>Quiz Result</h2>
+      <div *ngFor="let question of quiz.questions; let index = index">
+        <div class="result-question">
+          <h5>{{index + 1}}. {{question.name}}</h5>
+          <div class="row">
+            <div class="col-6" *ngFor="let Option of question.options">
+              <input id="{{Option.id}}" type="checkbox" disabled="disabled" [(ngModel)]="Option.selected" /> {{Option.name}}
+            </div>
+          </div>
+          <div class="p-1 m-2 alert {{ isCorrect(question) == 'correct'? 'alert-success': 'alert-danger'}}">Your answer is {{isCorrect(question)}}.</div>
+        </div>
+      </div>
+      <h4 class="alert alert-info text-center">You may close this window now.</h4>
+    </div>
+    <hr />
+    <div class = "text-center" *ngIf="mode!='result'">
+      <button class="btn btn-warning" (click)="mode = 'quiz'">Quiz</button>
+      <button class="btn btn-info" (click)="mode = 'review'">Review</button>
+      <button class="btn btn-primary" (click)="onSubmit();">Submit Quiz</button>
+    </div>
+  </div>
+
+
+
+// style.css
+
+.btn{
+    border-radius: 0;
+}
+
+.option{
+    background-color:#cadaee;
+    font-size:20px;
+    padding:10px;
+    margin:3px;
+}
+    #quiz .options input[type=checkbox] {
+        height:22px;
+        width:22px;
+    }
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.result-question{
+    background-color:#eee;
+    margin:4px;
+    padding:6px;
+}
+
+@media only screen and (max-width: 480px) {
+    h1,.h1{
+        font-size:22px;
+    }
+    h2,.h2{
+        font-size:20px;
+    }
+    h3,.h3{
+        font-size:18px;
+    }
+    .option {
+        font-size: 16px;
+        padding: 6px;
+    }
+}
+
+
+
+// package.json
+
+{
+  "name": "quiz-app",
+  "version": "0.0.3",
+  "author": "Bava",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "^8.0.2",
+    "@angular/common": "^8.0.2",
+    "@angular/compiler": "^8.0.2",
+    "@angular/core": "^8.0.2",
+    "@angular/forms": "^8.0.2",
+    "@angular/platform-browser": "^8.0.2",
+    "@angular/platform-browser-dynamic": "^8.0.2",
+    "@angular/router": "^8.0.2",
+    "bootstrap": "^4.1.1",
+    "core-js": "^3.1.4",
+    "jquery": "^3.3.1",
+    "rxjs": "^6.0.0",
+    "zone.js": "^0.9.1"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.800.3",
+    "@angular/cli": "~8.0.3",
+    "@angular/compiler-cli": "^8.0.2",
+    "@angular/language-service": "^8.0.2",
+    "@types/jasmine": "~3.3.13",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.0.10",
+    "codelyzer": "~5.1.0",
+    "jasmine-core": "~3.4.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~4.1.0",
+    "karma-chrome-launcher": "~2.2.0",
+    "karma-coverage-istanbul-reporter": "~2.0.5",
+    "karma-jasmine": "~2.0.1",
+    "karma-jasmine-html-reporter": "^1.4.2",
+    "protractor": "~5.4.2",
+    "ts-node": "~8.3.0",
+    "tslint": "~5.17.0",
+    "typescript": "3.4.5"
+  }
+}
+
+
+// index.ts
+
+
+export * from './option';
+export * from './question';
+export * from './quiz';
+export * from './quiz-config';
+
+
+
+
+// option.ts
+
+export class Option {
+    id: number;
+    questionId: number;
+    name: string;
+    isAnswer: boolean;
+    selected: boolean;
+
+    constructor(data: any) {
+        data = data || {};
+        this.id = data.id;
+        this.questionId = data.questionId;
+        this.name = data.name;
+        this.isAnswer = data.isAnswer;
+    }
+}
+
+
+
+// question.ts
+
+import { Option } from './option';
+
+export class Question {
+    id: number;
+    name: string;
+    questionTypeId: number;
+    options: Option[];
+    answered: boolean;
+
+    constructor(data: any) {
+        data = data || {};
+        this.id = data.id;
+        this.name = data.name;
+        this.questionTypeId = data.questionTypeId;
+        this.options = [];
+        data.options.forEach(o => {
+            this.options.push(new Option(o));
+        });
+    }
+}
+
+
+
+// quiz-config.ts
+
+export class QuizConfig {
+    allowBack: boolean;
+    allowReview: boolean;
+    autoMove: boolean;  // if boolean; it will move to next question automatically when answered.
+    duration: number;  // indicates the time in which quiz needs to be completed. 0 means unlimited.
+    pageSize: number;
+    requiredAll: boolean;  // indicates if you must answer all the questions before submitting.
+    richText: boolean;
+    shuffleQuestions: boolean;
+    shuffleOptions: boolean;
+    showClock: boolean;
+    showPager: boolean;
+    theme: string;
+
+    constructor(data: any) {
+        data = data || {};
+        this.allowBack = data.allowBack;
+        this.allowReview = data.allowReview;
+        this.autoMove = data.autoMove;
+        this.duration = data.duration;
+        this.pageSize = data.pageSize;
+        this.requiredAll = data.requiredAll;
+        this.richText = data.richText;
+        this.shuffleQuestions = data.shuffleQuestions;
+        this.shuffleOptions = data.shuffleOptions;
+        this.showClock = data.showClock;
+        this.showPager = data.showPager;
+    }
+}
+
+
+
+
+// quiz.ts
+
+import { QuizConfig } from './quiz-config';
+import { Question } from './question';
+
+export class Quiz {
+    id: number;
+    name: string;
+    description: string;
+    config: QuizConfig;
+    questions: Question[];
+
+    constructor(data: any) {
+        if (data) {
+            this.id = data.id;
+            this.name = data.name;
+            this.description = data.description;
+            this.config = new QuizConfig(data.config);
+            this.questions = [];
+            data.questions.forEach(q => {
+                this.questions.push(new Question(q));
+            });
+        }
+    }
+}
+
+
+
