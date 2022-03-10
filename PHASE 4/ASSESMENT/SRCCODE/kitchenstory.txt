@@ -1,0 +1,998 @@
+// index.html
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>TestApp2</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+
+
+// styles.css
+
+/* You can add global styles to this file, and also import other style files */
+.cart-item{
+    font-size: small;
+}
+.product-btn{
+    font-size: smaller;
+}
+
+
+// app-routing.module.ts
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AdminComponent } from './components/shared/nav/admin/admin.component';
+import { SearchComponent } from './components/shared/nav/search/search.component';
+import { CartComponent } from './components/shopping-cart/cart/cart.component';
+import { FiltersComponent } from './components/shopping-cart/filters/filters.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+
+const routes: Routes = [
+    {
+      path: "ADMIN-LOGIN", component: AdminComponent
+    },
+    {
+      path: "HOME", component: ShoppingCartComponent
+    },
+    {
+      path: "SEARCH", component: SearchComponent
+    },
+
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+
+
+
+// app.component.html
+
+<nav></nav>
+<marquee><h1 style="color: darkblue;font-style: italic;">Welcome To Market App</h1></marquee>
+<router-outlet></router-outlet>
+
+
+
+// app.component.spec.ts
+
+import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppComponent } from './app.component';
+
+describe('AppComponent', () => {
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [
+        RouterTestingModule
+      ],
+      declarations: [
+        AppComponent
+      ],
+    }).compileComponents();
+  });
+
+  it('should create the app', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app).toBeTruthy();
+  });
+
+  it(`should have as title 'test-app2'`, () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    const app = fixture.componentInstance;
+    expect(app.title).toEqual('test-app2');
+  });
+
+  it('should render title', () => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.nativeElement;
+    expect(compiled.querySelector('.content span').textContent).toContain('test-app2 app is running!');
+  });
+});
+
+
+
+// app.component.ts
+
+
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'test-app2';
+}
+
+
+
+// app.module.ts
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { NavComponent } from './components/shared/nav/nav.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { ProductListComponent } from './components/shopping-cart/product-list/product-list.component';
+import { CartComponent } from './components/shopping-cart/cart/cart.component';
+import { FiltersComponent } from './components/shopping-cart/filters/filters.component';
+import { CartItemComponent } from './components/shopping-cart/cart/cart-item/cart-item.component';
+import { ProductItemComponent } from './components/shopping-cart/product-list/product-item/product-item.component';
+import { AdminComponent } from './components/shared/nav/admin/admin.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchComponent } from './components/shared/nav/search/search.component';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    NavComponent,
+    ShoppingCartComponent,
+    ProductListComponent,
+    CartComponent,
+    FiltersComponent,
+    CartItemComponent,
+    ProductItemComponent,
+    AdminComponent,
+    SearchComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+
+
+// messenger.service.spec.ts
+
+import { TestBed } from '@angular/core/testing';
+
+import { MessengerService } from './messenger.service';
+
+describe('MessengerService', () => {
+  let service: MessengerService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(MessengerService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+
+
+
+// messenger.service.ts
+
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+@Injectable({
+  providedIn: 'root'
+})
+export class MessengerService {
+
+  subject = new Subject();
+  constructor() { }
+
+  sendmsg(product : any){
+      this.subject.next(product); 
+  }
+
+  getMsg(){
+      return this.subject.asObservable();
+  }
+}
+
+
+// product.service.spec.ts
+
+
+import { TestBed } from '@angular/core/testing';
+
+import { ProductService } from './product.service';
+
+describe('ProductService', () => {
+  let service: ProductService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(ProductService);
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
+});
+
+
+
+// product.service.ts
+
+
+import { Injectable } from '@angular/core';
+import { Product } from '../models/product';
+@Injectable({
+  providedIn: 'root'
+})
+export class ProductService {
+  
+  products: Product[] =[
+    
+    new Product(1,"product 1","This is the product 1 desc",100,"https://images-na.ssl-images-amazon.com/images/I/51psJ6v1aFL._SX425_.jpg"),
+    new Product(2,"product 2","This is the product 2 desc",150,"https://i.ytimg.com/vi/40awGIgvnQ0/maxresdefault.jpg"),
+    new Product(3,"product 3","This is the product 3 desc",50,"https://i.insider.com/5ac512497a74af1d008b46ad?width=1000&format=jpeg&auto=webp"),
+    new Product(4,"product 4","This is the product 4 desc",200,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTefBhqg-Gcd_fhCdTW3lqFzisiaN6wGDU4Yw&usqp=CAU"),
+    new Product(5,"product 5","This is the product 5 desc",100,"https://images-na.ssl-images-amazon.com/images/I/51nbqUW7ClL.jpg"),
+    new Product(6,"product 6","This is the product 6 desc",150,"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLANzZoPjtTVtivwnPMpVUmFNbgsFHyoeNpw&usqp=CAU"),
+  ]
+  constructor() { }
+
+  getProducts(): Product[]{
+    return this.products;
+    
+  }
+}
+
+
+
+// product.spec.ts
+
+
+import { Product } from './product';
+
+describe('Product', () => {
+  it('should create an instance', () => {
+    expect(new Product()).toBeTruthy();
+  });
+});
+
+
+
+// product.ts
+
+
+export class Product {
+    id: number=0;
+    name: string="";
+    description: string="";
+    price: number=0;
+    imageUrl: string="";
+
+    constructor(id: number, name: string, description: string="", price: number=0, imageUrl: string="https://thumbs.dreamstime.com/b/environment-earth-day-hands-trees-growing-seedlings-bokeh-green-background-female-hand-holding-tree-nature-field-gra-130247647.jpg"){
+        this.id=id;
+        this.name=name;
+        this.description=description;
+        this.price=price;
+        this.imageUrl=imageUrl;
+    }
+}
+
+
+// shopping-cart.component.html
+
+
+<div class="row">
+    <div class="col">
+        <filters></filters>
+    </div>
+    <div class="col-md-7">
+        <product-list></product-list>
+    </div>
+    <div class="col">
+        <cart></cart>
+    </div>
+</div>
+
+
+
+// shopping-cart.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ShoppingCartComponent } from './shopping-cart.component';
+
+describe('ShoppingCartComponent', () => {
+  let component: ShoppingCartComponent;
+  let fixture: ComponentFixture<ShoppingCartComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ShoppingCartComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ShoppingCartComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+
+// shopping-cart.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'shopping-cart',
+  templateUrl: './shopping-cart.component.html',
+  styleUrls: ['./shopping-cart.component.css']
+})
+export class ShoppingCartComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+// product-list.component.html
+
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+    <div class="col" *ngFor="let product of productList">
+        <product-item [productItem]="product"></product-item>
+      </div>
+    </div>
+
+
+
+// product-list.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ProductListComponent } from './product-list.component';
+
+describe('ProductListComponent', () => {
+  let component: ProductListComponent;
+  let fixture: ComponentFixture<ProductListComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ProductListComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ProductListComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+
+// product-list.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product';
+import { ProductService} from 'src/app/services/product.service';
+@Component({
+  selector: 'product-list',
+  templateUrl: './product-list.component.html',
+  styleUrls: ['./product-list.component.css']
+})
+export class ProductListComponent implements OnInit {
+
+
+  productList: Product[]=[];
+  constructor(private productService: ProductService) { 
+  }
+
+  ngOnInit(): void {
+    this.productList = this.productService.getProducts();
+  }
+
+}
+
+
+
+// product-item.component.html
+
+
+<div class="card shadow-sm">
+    <img class="bd-placeholder-img card-img-top" width="50px" height="150px" [src]="productItem.imageUrl"/>
+    <div class="card-body">
+        <p class="card-text">
+            <strong>{{ productItem.price | currency:'INR'}}
+            </strong>
+        </p>
+      <p class="card-text">{{ productItem.description}}</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+          <button type="button" 
+          class="btn btn-sm btn-primary product-btn"
+          (click)="handleAddToCart()">Add To cart</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary product-btn">View Details</button>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+
+// product-item.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { ProductItemComponent } from './product-item.component';
+
+describe('ProductItemComponent', () => {
+  let component: ProductItemComponent;
+  let fixture: ComponentFixture<ProductItemComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ ProductItemComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ProductItemComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+
+
+// product-item.component.ts
+
+
+import { Component, OnInit,Input } from '@angular/core';
+import { from } from 'rxjs';
+import { Product } from 'src/app/models/product';
+import { MessengerService } from 'src/app/services/messenger.service';
+
+@Component({
+  selector: 'product-item',
+  templateUrl: './product-item.component.html',
+  styleUrls: ['./product-item.component.css']
+})
+export class ProductItemComponent implements OnInit {
+  @Input() productItem!: Product;
+  constructor(private msg: MessengerService) { }
+
+  ngOnInit(): void {
+  }
+  handleAddToCart(){
+    this.msg.sendmsg(this.productItem);
+  }
+}
+
+
+
+
+// filters.component.html
+
+
+<div class="card">
+    <div class="card-header">
+        <strong>Filters</strong>
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="form-group">
+                <label for="from">From</label>
+                <input type="number" class="form-group">
+            </div>
+            <div class="form-group">
+                <label for="to">To</label>
+                <input type="number" class="form-group">
+            </div>
+            <button class="btn btn-primary btn-block btn-sm">Filter by Price</button>
+        </form>
+    </div>
+</div>
+
+
+// filters.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { FiltersComponent } from './filters.component';
+
+describe('FiltersComponent', () => {
+  let component: FiltersComponent;
+  let fixture: ComponentFixture<FiltersComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ FiltersComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(FiltersComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+
+// filters.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'filters',
+  templateUrl: './filters.component.html',
+  styleUrls: ['./filters.component.css']
+})
+export class FiltersComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+// cart.component.html
+
+
+<div *ngIf="cartItems.length === 0" class="alert alert-info">Your Cart is Empty </div>
+
+<ul *ngIf="cartItems.length > 0" class="list-group">
+    <li class="list-group-item" *ngFor=" let item of cartItems">
+        <cart-item [cartItem]= "item"></cart-item>
+    </li>
+    <li class="list-group-item active">
+        <strong>Total </strong>{{cartTotal | currency:'INR'}}
+    </li>
+</ul>
+
+
+
+
+// cart.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { CartComponent } from './cart.component';
+
+describe('CartComponent', () => {
+  let component: CartComponent;
+  let fixture: ComponentFixture<CartComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ CartComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CartComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+
+// cart.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product';
+import { MessengerService } from 'src/app/services/messenger.service';
+@Component({
+  selector: 'cart',
+  templateUrl: './cart.component.html',
+  styleUrls: ['./cart.component.css']
+})
+export class CartComponent implements OnInit {
+  cartItems= [
+    { id:1, ProductId:1, productname: "Test 1", qty: 1, price: 100},
+  ];
+  cartTotal=0;
+  
+  constructor(private msg: MessengerService) { }
+
+  ngOnInit() {
+      this.msg.getMsg().subscribe((product: any) =>{
+        console.log(product);
+      })
+      this.cartItems.forEach(item => {
+        const qty=0;
+        this.cartTotal +=(item.qty * item.price)
+      });  
+    }
+}
+
+
+// cart-item.component.html
+
+
+<div class="cart-item" >
+    <span>{{cartItem.productname}}</span> x <span>{{cartItem.qty}}</span>: <strong>{{cartItem.qty * cartItem.price | currency:'INR'}}</strong>
+</div>
+
+
+
+// cart-item.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { CartItemComponent } from './cart-item.component';
+
+describe('CartItemComponent', () => {
+  let component: CartItemComponent;
+  let fixture: ComponentFixture<CartItemComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ CartItemComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CartItemComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+
+// cart-item.component.ts
+
+
+import { Component, OnInit, Input } from '@angular/core';
+
+@Component({
+  selector: 'cart-item',
+  templateUrl: './cart-item.component.html',
+  styleUrls: ['./cart-item.component.css']
+})
+export class CartItemComponent implements OnInit {
+  @Input() cartItem: any;
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+// nav.component.html
+
+<div class="d-flex flex-coloum flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white bprder-botton shadow-sm">
+    <h1 class="my-0 mr-md-auto font-weight-normal">
+      Market App
+    </h1>
+    <form class="form-inline waves-light" mdbWavesEffect>
+      
+        <div class="md-form mt-0">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        </div>
+      </form><a class="btn btn-outline-primary" routerLink="/SEARCH">Search</a>&nbsp;
+      <a class="btn btn-outline-primary" routerLink="/HOME">Home</a>
+      &nbsp;<a class="btn btn-outline-primary" routerLink="/ADMIN-LOGIN">Admin Log In</a>
+</div>
+
+
+
+// nav.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { NavComponent } from './nav.component';
+
+describe('NavComponent', () => {
+  let component: NavComponent;
+  let fixture: ComponentFixture<NavComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ NavComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(NavComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+// nav.component.ts
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'nav',
+  templateUrl: './nav.component.html',
+  styleUrls: ['./nav.component.css']
+})
+export class NavComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+
+// search.component.html
+
+
+<div class="card shadow-sm " >
+    <img class="bd-placeholder-img card-img-top" width="5px" height="500px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrQF4qj4BAoFE-5X02czSdFwuPPNDbEo5IAg&usqp=CAU"/>
+    <div class="card-body">
+        <p class="card-text">
+            <strong>{{ 450 | currency:'INR'}}
+            </strong>
+        </p>
+      <p class="card-text">This is a cutter product</p>
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="btn-group">
+          <button type="button" 
+          class="btn btn-sm btn-primary product-btn"
+          >Add To cart</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary product-btn">View Details</button>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+// search.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { SearchComponent } from './search.component';
+
+describe('SearchComponent', () => {
+  let component: SearchComponent;
+  let fixture: ComponentFixture<SearchComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ SearchComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(SearchComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+// search.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+  selector: 'app-search',
+  templateUrl: './search.component.html',
+  styleUrls: ['./search.component.css']
+})
+export class SearchComponent implements OnInit {
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+}
+
+
+
+// admin.component.css
+
+
+div{
+    border: 2px;
+   margin: 30px;
+    border-style:hidden;
+
+}
+label{
+    color:crimson;
+}
+
+
+// admin.component.html
+
+
+<div>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <label>
+          Product Id:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="number" formControlName="productId">
+        </label>
+        <br/>
+        <label>
+          Product Name:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" formControlName="productName">
+        </label>
+        <br/>
+        <label>
+            Product Description:
+            <input type="text" formControlName="productDesc">
+          </label>
+          <br/>
+          <label>
+            Product Price:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" formControlName="productPrice">
+          </label>
+          <br/>
+          <label>
+            Product Image:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="text" formControlName="productImage">
+          </label>
+          <br/>
+          <br />
+            <span>
+             
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                
+                <button type="submit" name="submit">Register</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button type="submit" name="submit">Remove Item</button>
+            </span>
+      </form>
+</div>
+
+
+// admin.component.spec.ts
+
+
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { AdminComponent } from './admin.component';
+
+describe('AdminComponent', () => {
+  let component: AdminComponent;
+  let fixture: ComponentFixture<AdminComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ AdminComponent ]
+    })
+    .compileComponents();
+  });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(AdminComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+
+
+// admin.component.ts
+
+
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProductService} from 'src/app/services/product.service';
+
+@Component({
+  selector: 'app-admin',
+  templateUrl: './admin.component.html',
+  styleUrls: ['./admin.component.css']
+})
+export class AdminComponent implements OnInit {
+  product_items : string[] = [];
+  get_all_product_items:Object[] = [];
+  userForm!: FormGroup;
+  formControls: any;
+  user: any={};
+  formSubmitted!:boolean;
+  constructor(private formBuilder: FormBuilder,private productService:ProductService) { }
+
+  ngOnInit(): void {
+    this.userForm = this.formBuilder.group({
+      productId: ['', Validators.required],
+      productName: ['', Validators.required],
+      productDesc: ['', Validators.required],
+      productPrice: ['', Validators.required],
+      productImage: ['', Validators.required],
+      
+    });
+    this.formControls = this.userForm.controls;
+  }
+  onSubmit(){
+    this.formSubmitted = true;
+      const obj = this.userForm.value;
+    localStorage.setItem("product items",JSON.stringify(this.productService.getProducts()));
+    this.ngOnInit();
+  }
+  addUser(user: any){
+    console.log(this.productService.getProducts());
+    localStorage.setItem("Users",JSON.stringify(user));
+  }
+}
+
