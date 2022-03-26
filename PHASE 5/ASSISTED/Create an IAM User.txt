@@ -1,0 +1,38 @@
+Step 1: Selecting the IAM from the AWS console
+
+	Login to your AWS console and search for IAM
+
+ 
+
+
+Step 2: Navigate to the user creation page
+
+	Click on Users to redirect to the user creation page to create IAM users 
+
+ 
+
+
+Step 3: Changing access permissions
+
+	Add username in the User name* section. Select AWS Management Console access and select one of the ways to configure console password 
+ 
+	Either we can add user to the created group or we can add policy 
+
+ 	In case a user needs to add a policy first, then he or she needs to search and then add policy to the user 
+
+ 
+
+Step 4: Adding an identifier
+
+	Add an identifier by adding key and value to tag each user 
+ 
+	Finally, it will create a user with a group or an added policy
+
+	On successful user creation, a URL will be created with which a user can login as an IAM user
+
+	The newly created user will be available on the dashboard 
+
+	By clicking on each user, you can see the key sign in the URL
+
+	By selecting a user, you can add that user to a particular group 
+

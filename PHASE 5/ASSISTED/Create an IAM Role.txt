@@ -1,0 +1,22 @@
+Step 1: Creating an IAM role
+
+	In the IAM panel, click on Roles -> Create role
+ 
+	Select the service
+ 
+
+
+Step 2: Adding AWS policy to the role
+ 
+
+Step 3: Providing a key and a value for the role
+
+	Add a key and a value to the role
+ 
+	Add a role
+ 
+	Once the role is created, you can find it in the IAM panel
+
+ 
+
+

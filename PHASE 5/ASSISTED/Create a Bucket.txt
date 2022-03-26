@@ -1,0 +1,18 @@
+Step 1: Selecting S3 from the storage of the AWS service panel
+
+Step 2: Verifying the button to create a bucket 
+ 
+Step 3: Providing a bucket name and region
+	 Make sure that the bucket name is unique 
+ 
+Step 4: Entering key and value for identification and tracking the bucket
+
+Step 5: Blocking all the public access
+	If required, you can configure it later
+
+Step 6: Reviewing all parameters and creating the bucket 
+
+Step 7: Verifying the newly created bucket on the panel of S3 
+
+ 
+

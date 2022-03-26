@@ -1,0 +1,15 @@
+Step1: Selecting the EBS volume you want to detach
+
+	Choose the bucket
+ 
+	Select Detach Volume option
+ 
+
+
+Step 2: Detaching the volume
+
+	Select Yes once the confirmation pop-up appears
+ 
+	Once detached, the volume will be labeled as Available
+
+ 

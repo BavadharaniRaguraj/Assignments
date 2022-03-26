@@ -1,0 +1,14 @@
+// Creating a placement group
+
+        Click on Create Placement Group
+ 	Provide a name and strategy
+
+ 
+// Launching an instance in the placement group
+
+	Launch the new EC2 instance
+
+	Select the placement group
+
+ 	Verify the placement group of the instance
+

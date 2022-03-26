@@ -1,0 +1,13 @@
+Step 1: Download Selenium Standalone Server jar.
+
+Step 2: Launching eclipse and creating a Java project
+	  Open Eclipse and create a Workspace.
+	  Create a Project.
+	  Click on File -> New -> Java Project
+
+Step 3: Configuring WebDriver with Eclipse
+	   Add selenium standalone server jars
+	   Right click on Project -> select Properties -> Select Java Build Path 
+	   Navigate to Libraries tab and click on Add External Jars button
+	   Add selenium standalone server Jar files.
+	   Click on Apply and Close button.

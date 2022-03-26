@@ -1,0 +1,19 @@
+Step 1: Creating service for scaling 
+
+Please Note: 
+    Docker containers deployed on Docker swarm cluster can be scaled up and down to implement high availability of Docker containers. 
+    If in case any Docker container gets crashed, we can get a new one created and other containers can easily handle the load. 
+
+
+	Use the commands below to create a service and scale the service up and down to increase or decrease Docker containers
+             docker service create -p 8080:8080 --name bootcampjocatalin/kubernetes-bootcamp:v1
+             docker service ls
+             docker service psbootcamp
+             curl localhost:8080
+
+ 
+
+	Once the container deployed, we can scale up and down the Docker swarm service following the process shown below
+             docker service scale bootcamp=3
+             docker service psbootcamp
+             curl localhost:8080

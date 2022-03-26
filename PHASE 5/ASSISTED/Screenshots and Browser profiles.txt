@@ -1,0 +1,67 @@
+// Screenshots
+
+	Open Eclipse
+	Convert web driver object to TakeScreenshot
+	Call getScreenshotAs method to create image file
+	Copy file to desire location
+	
+// Convert web driver object to TakeScreenshot
+
+	Syntax : TakesScreenshot  scrShot = (TakesScreenshot)driver;
+
+// Call getScreenshotAs method to create image file
+
+	Syntax: File srcFile = scrShot.getScreenshotAs(OutType.FILE);
+
+
+// Copy file to desire location
+
+	Syntax: FileUtils.copyFile(source, filePath);
+	Open Eclipse and write the code giveln below 
+
+            package screenshots.screenshot;
+            import java.io.File;
+            import java.io.IOException;
+            import org.openqa.selenium.By;
+            import org.openqa.selenium.OutputType;
+            import org.openqa.selenium.TakesScreenshot;
+            import org.openqa.selenium.WebDriver;
+            import org.openqa.selenium.WebElement;
+            import org.openqa.selenium.chrome.ChromeDriver;
+            import com.sun.jna.platform.FileUtils;
+
+            public class Screenshots {
+	             public static void main(String[] args ) throws IOException
+	                {
+	    	            System.setProperty("webdriver.chrome.driver",   "C:\\Users\\Testing-L-064\\chromedriver_win32\\chromedriver.exe");
+	                   WebDriver driver = new ChromeDriver();
+	                   driver.get("https://www.flipkart.com/");
+	                   WebElement upload = driver.findElement(By.xpath("//*[@type='text']"));
+	                   upload.click();
+	                   TakesScreenshot ts = (TakesScreenshot)driver;
+	                   File scr = ts.getScreenshotAs(OutputType.FILE);
+	                   FileUtils.copyFile(scr, new File("/Screenshot/test.png");
+	       
+	       
+	                }
+            }
+
+
+// Running the code
+
+	Run the code through eclipse.
+
+
+// Browser profiles:
+
+	First of all, close the Firefox if it is opened.
+	Open Run (Windows+R) and type firefox.exe -p and click OK.
+	A dialogue box will open with named ‘Firefox -choose user profile’.
+	Select option ‘Create Profile’ from the window, and a Wizard will open, click on Next.
+	Provide your profile name which you want to create and click on Finish button.
+
+
+
+
+
+

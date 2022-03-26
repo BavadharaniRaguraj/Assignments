@@ -1,0 +1,5 @@
+Step 1: To view snapshots, you need to navigate to the EC2 dashboard available on the panel on the left. Click on snapshot to view all available snapshots.  
+
+ 
+
+

@@ -1,0 +1,15 @@
+Step 1: Selecting the snapshot
+
+	Go to EC2 dashboard in EBS and click on Snapshot 
+
+ 
+Step 2: Restoring volume from the snapshot
+
+	Select the snapshot and click on Action
+
+ 	You can specify the key and value to identify the volume
+
+	Restore the volume from the snapshot
+
+
+

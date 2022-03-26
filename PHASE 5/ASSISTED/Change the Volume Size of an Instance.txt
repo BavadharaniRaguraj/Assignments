@@ -1,0 +1,8 @@
+Step 1: Creating the new volume which we want to add to an instance and clicking on create volume
+Step 2: Validating the Availability zone of the EC2 instance with which you want to add volume
+Step 3: Providing type, size, availability zone, and snapshot name on the create volume tab
+Step 4: Selecting newly created volume and clicking on the action to attach the volume to the instance
+Step 5: Selecting the instance of the same availability zone and attaching the volume in pop
+Step 6: Verifying the instance by adding one more device to the block device
+
+ 

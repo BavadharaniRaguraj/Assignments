@@ -1,0 +1,73 @@
+// Creating a simple Java project
+
+	Open Eclipse
+	Go the File menu. Choose New->Java Project
+	Enter the project name as Annotations. Click on Next
+	This will create the project files in the Project Explorer
+
+
+
+// Installing TestNG
+
+	TestNG is installed as an eclipse plugin.
+
+// Adding TestNG libraries to the Class Path
+
+	In the Project Explorer, right click on Annotations
+	Select Properties. Select Java Build Path from the list. Go to Libraries
+	Click on Add Library. Select TestNG. Click on Next. Click on Finish
+	Click on Apply and Close
+     
+
+// Creating a class file named TestAnnotations
+
+	In the Project Explorer, expand Annotations->Java Resources
+	Right click on src and choose New->Class
+	In Class Name, enter TestAnnotations. In Package Name, enter com.testannotations and click on Finish
+	Enter the following code:
+
+package com.testannotations;
+
+import org.testng.annotations.*;
+
+public class TestAnnotations {
+	
+	@Test
+	public void Test1() {
+		System.out.println("Test1 Executed");
+	}
+	@Test
+	public void Test2() {
+		System.out.println("Test2 Executed");
+	}
+	
+	@BeforeTest
+	public void beforeTest() {
+		System.out.println("BeforeTest Executed");
+	}
+	@AfterTest
+	public void AfterTest() {
+		System.out.println("AfterTest Executed");
+	}
+	
+	@BeforeMethod
+	public void beforeMethod() {
+		System.out.println("BeforeMethod Executed");
+	}
+	@AfterMethod
+	public void afterMethod() {
+		System.out.println("AfterMethod Executed");
+	}
+	
+	@BeforeClass
+	public void beforeClass() {
+		System.out.println("BeforeClass Executed");
+	}
+	@AfterClass
+	public void afterClass() {
+		System.out.println("AfterClass Executed");
+	}
+	
+}
+    
+

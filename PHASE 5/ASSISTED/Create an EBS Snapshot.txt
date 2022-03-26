@@ -1,0 +1,6 @@
+Step 1: Creating an EBS snapshot
+
+	Select Volume in EC2 dashboard 
+	Click on Action -> Create Snapshot
+ 	Add snapshot name, key, and value
+ 

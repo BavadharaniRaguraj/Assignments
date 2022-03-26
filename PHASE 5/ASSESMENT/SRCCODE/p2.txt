@@ -1,0 +1,469 @@
+// Creating a Dockerfile
+
+The Dockerfile for java_image:
+
+     FROM ubuntu:16.10
+     MAINTAINER Author name 
+     RUN apt-get update
+     RUN apt-get install -y python-software-properties software-properties-common
+     RUN \  
+     echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \  
+     add-apt-repository -y ppa:webupd8team/java && \  
+     apt-get update && \  
+     apt-get install -y oracle-java8-installer
+
+     RUN useradd -d /home/esuser -m esuser
+     WORKDIR /home/esuser
+     ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+
+
+// Assembling an Elasticsearch Image
+
+cluster.name: docker-example
+node.name: docker-node-1
+path.data: /home/esuser/data
+network.host:0.0.0.0
+
+
+FROM java_image 
+MAINTAINER Author name
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN mkdir /data
+
+RUN \ 
+wget https://download.elasticsearch.org/elasticsearch/release/org/elasticsearch/distribution/tar/elasticsearch/2.1.1/elasticsearch-2.1.1.tar.gz && \ 
+tar xvzf elasticsearch-2.1.1.tar.gz && \ 
+rm -f elasticsearch-2.1.1.tar.gz && \ 
+chown -R esuser:esuser elasticsearch-2.1.1
+
+# elasticsearch.yml and Dockerfile are on same location 
+ADD elasticsearch.yml /home/esuser/elasticsearch-2.1.1/config/elasticsearch.yml 
+ENTRYPOINT elasticsearch-2.1.1/bin/elasticsearch
+
+
+// Assembling a Logstash Image
+
+input {
+ beats {
+port => 5000 
+}
+}
+
+
+output {
+ elasticsearch { 
+ hosts => ["es:9200"] 
+ } 
+ }
+
+
+filter {
+ if [type] == "nginx" and [input_type] == "access" {
+ grok {
+ match => [ "message" , "%{COMBINEDAPACHELOG}+%{GREEDYDATA:extra_fields}"]
+ overwrite => [ "message" ]
+ }
+
+mutate {
+ convert => ["response", "integer"]
+ convert => ["bytes", "integer"]
+ convert => ["responsetime", "float"]
+ }
+
+geoip {
+ source => "clientip"
+ target => "geoip"
+ add_tag => [ "nginx-geoip" ]
+ }
+
+date {
+ match => [ "timestamp" , "dd/MMM/YYYY:HH:mm:ss Z" ]
+ remove_field => [ "timestamp" ]
+ }
+
+useragent {
+ source => "agent"
+ }
+ } else if [type] == "nginx" and [input_type] == "error" {
+ grok {
+ match => [ "message" , "(?%{YEAR}[./-]%{MONTHNUM}[./-]%{MONTHDAY}[- ]%{TIME}) \[%{LOGLEVEL:severity}\] %{POSINT:pid}#%{NUMBER}: %{GREEDYDATA:errormessage}(?:, client: (?%{IP}|%{HOSTNAME}))(?:, server: (%{IPORHOST:server})?)(?:, request: %{QS:request})?(?:, upstream: \"%{URI:upstream}\")?(?:, host: %{QS:host})?(?:, referrer: \"%{URI:referrer}\")?"]
+ overwrite => [ "message" ]
+ }
+
+geoip {
+ source => "client"
+ target => "geoip"
+ add_tag => [ "nginx-geoip" ]
+ }
+
+date {
+ match => [ "timestamp" , "YYYY/MM/dd HH:mm:ss" ]
+ remove_field => [ "timestamp" ]
+ }
+ } else if [type] == "linux" and [input_type] == "syslog" {
+ grok {
+ match => { "message" => "%{SYSLOGLINE}" }
+ overwrite => [ "message" ]
+ }
+ }
+ }
+
+// Configure Logstash
+
+input {
+ beats {
+ port => 5000
+ }
+ }
+ filter {
+ if [type] == "nginx" and [input_type] == "access" {
+ grok {
+ match => [ "message" , "%{COMBINEDAPACHELOG}+%{GREEDYDATA:extra_fields}"]
+ overwrite => [ "message" ]
+ }
+
+mutate {
+ convert => ["response", "integer"]
+ convert => ["bytes", "integer"]
+ convert => ["responsetime", "float"]
+ }
+
+geoip {
+ source => "clientip"
+ target => "geoip"
+ add_tag => [ "nginx-geoip" ]
+ }
+
+date {
+ match => [ "timestamp" , "dd/MMM/YYYY:HH:mm:ss Z" ]
+ remove_field => [ "timestamp" ]
+ }
+
+useragent {
+ source => "agent"
+ }
+ } else if [type] == "nginx" and [input_type] == "error" {
+ grok {
+ match => [ "message" , "(?%{YEAR}[./-]%{MONTHNUM}[./-]%{MONTHDAY}[- ]%{TIME}) \[%{LOGLEVEL:severity}\] %{POSINT:pid}#%{NUMBER}: %{GREEDYDATA:errormessage}(?:, client: (?%{IP}|%{HOSTNAME}))(?:, server: (%{IPORHOST:server})?)(?:, request: %{QS:request})?(?:, upstream: \"%{URI:upstream}\")?(?:, host: %{QS:host})?(?:, referrer: \"%{URI:referrer}\")?"]
+ overwrite => [ "message" ]
+ }
+
+geoip {
+ source => "client"
+ target => "geoip"
+ add_tag => [ "nginx-geoip" ]
+ }
+
+date {
+ match => [ "timestamp" , "YYYY/MM/dd HH:mm:ss" ]
+ remove_field => [ "timestamp" ]
+ }
+ } else if [type] == "linux" and [input_type] == "syslog" {
+ grok {
+ match => { "message" => "%{SYSLOGLINE}" }
+ overwrite => [ "message" ]
+ }
+ }
+ }
+
+output {
+ elasticsearch {
+ hosts => ["es:9200"]
+ }
+ }
+
+
+FROM java_image
+ MAINTAINER Author name
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN \
+ wget https://download.elastic.co/logstash/logstash/logstash-2.1.1.tar.gz && \
+ tar xvzf logstash-2.1.1.tar.gz && \
+ rm -f logstash-2.1.1.tar.gz && \
+ chown -R esuser:esuser logstash-2.1.1
+
+# logstash.conf and Dockerfile are on same location
+ ADD logstash.conf /home/esuser
+
+CMD logstash-2.1.1/bin/logstash -f logstash.conf --verbose
+
+
+
+// Creating a Kibana Configuration File
+
+server.port: 5601
+ server.host: "0.0.0.0"
+ elasticsearch.url: "http://es:9200"
+
+A Dockerfile looks like this:
+
+$ sudo apt-get update
+Copy
+FROM java_image
+ MAINTAINER Author name
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN \
+ wget https://download.elastic.co/kibana/kibana/kibana-4.3.1-linux-x64.tar.gz && \
+ tar xvzf kibana-4.3.1-linux-x64.tar.gz && \
+ rm -f kibana-4.3.1-linux-x64.tar.gz && \
+ chown -R esuser:esuser kibana-4.3.1-linux-x64
+
+ADD kibana.yml kibana-4.3.1-linux-x64/config/kibana.yml
+
+ENTRYPOINT kibana-4.3.1-linux-x64/bin/kibana
+
+
+// Booting the ELK Stack
+
+First, start with Elasticsearch:
+
+docker run --user esuser --name es -d -v es_image
+
+The command to keep data persistent is:
+
+docker run --user esuser --name es -d -v /path/to/data/:/home/esuser/data es_image
+
+Next, start Logstash:
+
+docker run -d --name logstash --link es:es logstash_image
+
+The last piece in our stack is Kibana:
+
+docker run --name kibana --link es:es -d -p 5601:5601 --link es:es kibana_image
+
+Dockerfile for Filebeat looks like this:
+
+FROM java_image
+ MAINTAINER Author name
+
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN \
+ wget https://download.elastic.co/beats/filebeat/filebeat-1.0.1-x86_64.tar.gz && \
+ tar zxvf filebeat-1.0.1-x86_64.tar.gz && \
+ rm -f filebeat-1.0.1-x86_64.tar.gz
+
+ADD filebeat.yml filebeat-1.0.1-x86_64/filebeat.yml
+
+Whereas the filebeat.yml looks like this:
+
+filebeat:
+ prospectors:
+ -
+ paths:
+ - /var/log/nginx/access.log
+ input_type: access
+ document_type: nginx
+ -
+ paths:
+ - /var/log/nginx/error.log
+ input_type: error
+ document_type: nginx
+
+-
+ paths:
+ - /var/log/syslog
+ input_type: syslog
+ document_type: linux
+
+registry_file: /home/fb_registry.filebeat
+
+output:
+ logstash:
+ hosts: ["logstash:5000"]
+ worker: 1
+
+
+// Creating an NGINX Image
+
+daemon off;
+
+worker_processes 1;
+
+events { worker_connections 1024; }
+
+http {
+
+sendfile on;
+
+server {
+
+listen 80;
+ root /usr/share/nginx/html;
+ }
+ }
+
+
+The Dockerfile for NGINX is this:
+
+FROM filebeat_image
+MAINTAINER Author name
+ENV DEBIAN_FRONTEND noninteractive
+
+WORKDIR /home/esuser
+RUN apt-get update
+RUN apt-get install -y wget
+RUN wget -q http://nginx.org/keys/nginx_signing.key -O- | apt-key add -
+RUN echo deb http://ppa.launchpad.net/nginx/stable/ubuntu wily main >> /etc/apt/sources.list
+RUN echo deb-src http://ppa.launchpad.net/nginx/stable/ubuntu wily main >> /etc/apt/sources.list
+
+RUN apt-get update
+RUN apt-get -y install nginx pwgen python-setuptools curl git unzip vim rsyslog
+
+RUN chown -R www-data:www-data /var/lib/nginx
+RUN rm -v /etc/nginx/nginx.conf
+ADD nginx.conf /etc/nginx/
+
+WORKDIR /etc/nginx
+CMD /home/esuser/filebeat-1.0.1-x86_64/filebeat -c /home/esuser/filebeat-1.0.1-x86_64/filebeat.yml >/dev/null 2>&1 & service nginx start
+
+And finally, the NGINX image:
+
+docker build -t nginx_image
+
+docker run -d -p 8080:80 --link logstash:logstash nginx_image
+
+docker run -d -p 8081:80 --link logstash:logstash nginx_image
+
+docker run -d -p 8080:80 --link logstash:logstash -v /path/to/the/nginx/log:/var/log/nginx -v /path/to/syslog:/var/log/syslog nginx_image
+
+docker run -d -p 8081:80 --link logstash:logstash -v /path/to/the/nginx/log:/var/log/nginx -v /path/to/syslog:/var/log/syslog nginx_image
+
+
+// Log Docker Container Activity
+
+The starting command:
+
+wget http://localhost:2375/events
+
+input {
+ file {
+ path => "/home/esuser/events.log"
+ start_position => "beginning"
+ }
+ }
+
+filter {
+ json {
+ source => "message"
+ }
+ }
+ output {
+ elasticsearch {
+ hosts => ["es:9200"]
+ }
+ }
+
+
+// Starting the ELK Stack
+
+docker run --user esuser --name es -d -v /path/to/data/:/home/esuser/data es_image
+
+docker run --name kibana --link es:es -d -p 5601:5601 --link es:es kibana_image
+
+docker run -d --link es:es --name logstash -v /path/to/the/wget/events:/home/esuser/events.log logstash_image
+
+{
+ "size": 0,
+ "query": {
+ "filtered": {
+ "filter": {
+ "bool": {
+ "should": [
+ {
+ "term": {
+ "status.raw": "die"
+ }
+ },
+ {
+ "term": {
+ "status.raw": "start"
+ }
+ }
+ ]
+ }
+ }
+ }
+ },
+ "aggs": {
+ "by_container_id": {
+ "terms": {
+ "field": "id.raw"
+ },
+ "aggs": {
+ "live_session": {
+ "scripted_metric": {
+ "map_script": "_agg['d']=doc",
+ "reduce_script": "start_time=0; die_time=0; for(a in _aggs) { if(a.d['status.raw'].value=='start') {start_time = a.d['time'].value}; if(a.d['status.raw'].value=='die') {die_time = a.d['time'].value}; }; diff = die_time - start_time; if(diff > 0) return diff"
+ }
+ }
+ }
+ }
+ }
+ }
+Copy
+This query can be applied to previously defined structures that Logstash previously shipped to Elasticsearch.
+
+The result of the query looks like this:
+
+{
+ "took": 8,
+ "timed_out": false,
+ "_shards": {
+ "total": 5,
+ "successful": 5,
+ "failed": 0
+ },
+ "hits": {
+ "total": 5,
+ "max_score": 0,
+ "hits": []
+ },
+ "aggregations": {
+ "by_container_id": {
+ "doc_count_error_upper_bound": 0,
+ "sum_other_doc_count": 0,
+ "buckets": [
+ {
+ "key": "df43acbfe88480354bd48005b70afa2b34dec1b40a878a7d90adf2ed458af449",
+ "doc_count": 2,
+ "live_session": {
+ "value": 68
+ }
+ },
+ {
+ "key": "8e127e7d0ca9b665f9e7b20bedfc79624f8670c0ed2c6879941c6faf7329e502",
+ "doc_count": 1,
+ "live_session": {
+ "value": null
+ }
+ },
+ {
+ "key": "a2b789c58d5df54014acd2689bcef74f078732ea036f7a511804e42db7423a22",
+ "doc_count": 1,
+ "live_session": {
+ "value": null
+ }
+ },
+ {
+ "key": "e68596b37aace3300700d410432be349806e0a17df9b5a5057f38e476995b13b",
+ "doc_count": 1,
+ "live_session": {
+ "value": null
+ }
+ }
+ ]
+ }
+ }
+ }
+
+
+
+
+

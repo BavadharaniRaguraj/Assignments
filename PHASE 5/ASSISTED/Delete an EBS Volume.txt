@@ -1,0 +1,7 @@
+Step 1: Selecting the EBS volume you want to delete
+ 
+
+Step 2: Deleting the volume
+ 
+
+
